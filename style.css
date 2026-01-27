@@ -290,3 +290,51 @@ body{
     height: 250px;
     width: 250px;
 }
+.gallary{
+    margin:0 auto;
+    height:200px;
+    width:90%;
+    background-color:rgba(222, 204, 204, 0.82) ;
+     display: flex;
+    justify-content: center;
+    /* align-content: center;  */
+    display: grid;
+    grid-template-columns: 2.2fr 1fr 1fr 1fr;
+    grid-auto-rows: 150px;
+    column-gap: 1px;
+    border-radius: 10px;
+  
+
+}
+.grid{
+    position: relative;
+    border-radius: 10px;
+
+}
+.grid img{
+    height:150px;
+    width:100%;
+    position:absolute;
+    top:20px;
+    left:0px;
+    right:0px;
+    bottom:20px;
+    border-radius: 10px;
+    
+    
+}
+#g1{
+    margin-left: 50px;
+    margin-top: 40px;
+
+}
+#g1 p{
+    position: absolute;
+    top:40px;
+    margin:none;
+}
+
+#g1 button{
+    position: absolute;
+    top:100px;
+}
