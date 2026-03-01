@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Bank Dashboard | Map My Blood</title>
+    <link rel="icon" href="Images/new logo.png" />
+    <link rel="stylesheet" href="BloodBankDashBoard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="Images/new logo.png" alt="Logo" />
+            <span>Map My <strong>Blood</strong></span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+            <a href="#" class="nav-item" data-section="stock">
+                <i class="fa-solid fa-droplet"></i> Stock Manager
+            </a>
+            <a href="#" class="nav-item" data-section="requests">
+                <i class="fa-solid fa-inbox"></i> Incoming Requests
+            </a>
+            <a href="#" class="nav-item" data-section="profile">
+                <i class="fa-solid fa-building"></i> Bank Profile
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="verified-badge">
+                <i class="fa-solid fa-shield-halved"></i> Verified Organisation
+            </div>
+            <a href="HomePage.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="main-content">
+
+        <!-- Topbar -->
+        <header class="topbar">
+            <button class="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="topbar-title">Dashboard</div>
+            <div class="topbar-right">
+                <span class="org-name">AIIMS Blood Bank</span>
+                <div class="avatar">A</div>
+            </div>
+        </header>
+
+        <!-- ─── SECTION: DASHBOARD ─── -->
+        <section class="section active" id="sec-dashboard">
+
+            <!-- Stats -->
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fa-solid fa-droplet"></i></div>
+                    <div>
+                        <div class="stat-num">846</div>
+                        <div class="stat-label">Total Units in Stock</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-inbox"></i></div>
+                    <div>
+                        <div class="stat-num">12</div>
+                        <div class="stat-label">Requests Today</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon yellow"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                    <div>
+                        <div class="stat-num">2</div>
+                        <div class="stat-label">Low Stock Groups</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon red"><i class="fa-solid fa-circle-xmark"></i></div>
+                    <div>
+                        <div class="stat-num">1</div>
+                        <div class="stat-label">Out of Stock</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stock overview table + quick update -->
+            <div class="two-col mt-20">
+
+                <!-- Blood stock overview -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-droplet"></i> Current Blood Stock
+                        <button class="btn-small-red" style="margin-left:auto;" onclick="goToSection('stock')">
+                            Update Stock
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <table class="simple-table">
+                            <thead>
+                                <tr>
+                                    <th>Blood Group</th>
+                                    <th>Units</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stockTableBody">
+                                <!-- filled by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Incoming requests -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-inbox"></i> Recent Requests
+                    </div>
+                    <div class="card-body">
+                        <table class="simple-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Blood</th>
+                                    <th>Priority</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Rahul K.</td>
+                                    <td><span class="blood-badge">B+</span></td>
+                                    <td><span class="priority urgent">Urgent</span></td>
+                                    <td>
+                                        <button class="btn-accept"
+                                            onclick="handleRequest(this, 'accept')">Accept</button>
+                                        <button class="btn-decline"
+                                            onclick="handleRequest(this, 'decline')">Decline</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Priya S.</td>
+                                    <td><span class="blood-badge">O-</span></td>
+                                    <td><span class="priority normal">Normal</span></td>
+                                    <td>
+                                        <button class="btn-accept"
+                                            onclick="handleRequest(this, 'accept')">Accept</button>
+                                        <button class="btn-decline"
+                                            onclick="handleRequest(this, 'decline')">Decline</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Amit D.</td>
+                                    <td><span class="blood-badge">A+</span></td>
+                                    <td><span class="priority normal">Normal</span></td>
+                                    <td>
+                                        <button class="btn-accept"
+                                            onclick="handleRequest(this, 'accept')">Accept</button>
+                                        <button class="btn-decline"
+                                            onclick="handleRequest(this, 'decline')">Decline</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Notice banner -->
+            <div class="notice-banner mt-20">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Your stock data is visible to users searching for blood nearby. Keep it updated for
+                    accuracy.</span>
+            </div>
+
+        </section>
+
+        <!-- ─── SECTION: STOCK MANAGER ─── -->
+        <section class="section" id="sec-stock">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-droplet"></i> Update Blood Stock
+                </div>
+                <div class="card-body">
+                    <p style="font-size:13px; color:var(--muted); margin-bottom:18px;">
+                        Enter the current number of units for each blood group. This will be shown to users searching
+                        for blood near your location.
+                    </p>
+                    <div class="stock-edit-grid" id="stockEditGrid">
+                        <!-- filled by JS -->
+                    </div>
+                    <button class="btn-red" style="margin-top:20px;" onclick="saveStock()">
+                        <i class="fa-solid fa-floppy-disk"></i> Save All Changes
+                    </button>
+                    <div id="saveMsg" class="save-msg hidden">
+                        <i class="fa-solid fa-circle-check"></i> Stock updated successfully!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── SECTION: INCOMING REQUESTS ─── -->
+        <section class="section" id="sec-requests">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa-solid fa-inbox"></i> All Incoming Requests
+                </div>
+                <div class="card-body">
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Patient Name</th>
+                                <th>Blood Group</th>
+                                <th>Contact</th>
+                                <th>Priority</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Rahul Kumar</td>
+                                <td><span class="blood-badge">B+</span></td>
+                                <td>+91 98765 43210</td>
+                                <td><span class="priority urgent">Urgent</span></td>
+                                <td>01 Mar 2026</td>
+                                <td>
+                                    <button class="btn-accept" onclick="handleRequest(this,'accept')">Accept</button>
+                                    <button class="btn-decline" onclick="handleRequest(this,'decline')">Decline</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Priya Sharma</td>
+                                <td><span class="blood-badge">O-</span></td>
+                                <td>+91 91234 56789</td>
+                                <td><span class="priority normal">Normal</span></td>
+                                <td>01 Mar 2026</td>
+                                <td>
+                                    <button class="btn-accept" onclick="handleRequest(this,'accept')">Accept</button>
+                                    <button class="btn-decline" onclick="handleRequest(this,'decline')">Decline</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Amit Desai</td>
+                                <td><span class="blood-badge">A+</span></td>
+                                <td>+91 70000 12345</td>
+                                <td><span class="priority normal">Normal</span></td>
+                                <td>28 Feb 2026</td>
+                                <td>
+                                    <button class="btn-accept" onclick="handleRequest(this,'accept')">Accept</button>
+                                    <button class="btn-decline" onclick="handleRequest(this,'decline')">Decline</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── SECTION: BANK PROFILE ─── -->
+        <section class="section" id="sec-profile">
+            <div class="card" style="max-width:560px;">
+                <div class="card-header">
+                    <i class="fa-solid fa-building"></i> Organisation Profile
+                </div>
+                <div class="card-body">
+                    <div class="verified-banner">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Verified Blood Bank &mdash; Registration No: <strong>BB/DL/2021/0042</strong>
+                    </div>
+                    <div class="form-group mt-20">
+                        <label>Organisation Name</label>
+                        <input type="text" value="AIIMS Blood Bank" />
+                    </div>
+                    <div class="form-group">
+                        <label>UHID</label>
+                        <input type="text" value="UHID-DL-00124" />
+                    </div>
+                    <div class="form-group">
+                        <label>Registration Number</label>
+                        <input type="text" value="BB/DL/2021/0042" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="bloodbank@aiims.edu" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" value="+91 11 2658 8500" />
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" value="Sri Aurobindo Marg, Ansari Nagar, New Delhi - 110029" />
+                    </div>
+                    <button class="btn-red" style="margin-top:10px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
+                    <p style="font-size:11px; color:var(--muted); margin-top:12px;">
+                        <i class="fa-solid fa-lock" style="margin-right:4px;"></i>
+                        Registration details can only be changed by the Map My Blood admin team.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ── Blood group stock data (would come from DB in production) ──
+        var stockData = [
+            { group: 'A+', units: 120 },
+            { group: 'A-', units: 18 },
+            { group: 'B+', units: 95 },
+            { group: 'B-', units: 9 },
+            { group: 'AB+', units: 42 },
+            { group: 'AB-', units: 0 },
+            { group: 'O+', units: 210 },
+            { group: 'O-', units: 31 },
+        ];
+
+        // Determine status label
+        function getStatus(units) {
+            if (units === 0) return { label: 'Out of Stock', cls: 'status-out' };
+            if (units < 15) return { label: 'Low', cls: 'status-low' };
+            if (units < 50) return { label: 'Available', cls: 'status-ok' };
+            return { label: 'Good', cls: 'status-good' };
+        }
+
+        // ── Render the stock table on dashboard ──
+        function renderStockTable() {
+            var tbody = document.getElementById('stockTableBody');
+            tbody.innerHTML = '';
+            stockData.forEach(function (item) {
+                var st = getStatus(item.units);
+                var tr = document.createElement('tr');
+                tr.innerHTML =
+                    '<td><span class="blood-badge">' + item.group + '</span></td>' +
+                    '<td>' + item.units + ' units</td>' +
+                    '<td><span class="status ' + st.cls + '">' + st.label + '</span></td>';
+                tbody.appendChild(tr);
+            });
+        }
+
+        // ── Render the stock edit grid ──
+        function renderStockEdit() {
+            var grid = document.getElementById('stockEditGrid');
+            grid.innerHTML = '';
+            stockData.forEach(function (item, i) {
+                var card = document.createElement('div');
+                card.className = 'stock-edit-card';
+                card.innerHTML =
+                    '<div class="seg-group">' + item.group + '</div>' +
+                    '<input type="number" min="0" class="seg-input" data-index="' + i + '" value="' + item.units + '" />' +
+                    '<div class="seg-label">units</div>';
+                grid.appendChild(card);
+            });
+        }
+
+        function saveStock() {
+            // Read input values and update stockData
+            document.querySelectorAll('.seg-input').forEach(function (inp) {
+                var idx = parseInt(inp.getAttribute('data-index'));
+                var val = parseInt(inp.value) || 0;
+                stockData[idx].units = val;
+            });
+            renderStockTable(); // refresh dashboard table
+
+            // Show success message
+            var msg = document.getElementById('saveMsg');
+            msg.classList.remove('hidden');
+            setTimeout(function () { msg.classList.add('hidden'); }, 3000);
+        }
+
+        // ── Handle accept / decline request ──
+        function handleRequest(btn, action) {
+            var row = btn.closest('tr');
+            var td = btn.parentElement;
+            if (action === 'accept') {
+                td.innerHTML = '<span class="status status-good">Accepted</span>';
+            } else {
+                td.innerHTML = '<span class="status status-out">Declined</span>';
+            }
+        }
+
+        // ── Section switching ──
+        function goToSection(sectionId) {
+            document.querySelectorAll('.nav-item').forEach(function (l) { l.classList.remove('active'); });
+            var link = document.querySelector('.nav-item[data-section="' + sectionId + '"]');
+            if (link) link.classList.add('active');
+
+            document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+            var sec = document.getElementById('sec-' + sectionId);
+            if (sec) sec.classList.add('active');
+
+            document.querySelector('.topbar-title').textContent =
+                sectionId.charAt(0).toUpperCase() + sectionId.slice(1).replace('-', ' ');
+        }
+
+        document.querySelectorAll('.nav-item[data-section]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                goToSection(this.getAttribute('data-section'));
+                document.getElementById('sidebar').classList.remove('open');
+            });
+        });
+
+        // ── Sidebar mobile toggle ──
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // ── Init ──
+        renderStockTable();
+        renderStockEdit();
+    </script>
+
+</body>
+
+</html>

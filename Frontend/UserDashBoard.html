@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard | Map My Blood</title>
+    <link rel="icon" href="Images/new logo.png" />
+    <link rel="stylesheet" href="UserDashBoard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="Images/new logo.png" alt="Logo" />
+            <span>Map My <strong>Blood</strong></span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+            <a href="BloodSearchpage.html" class="nav-item">
+                <i class="fa-solid fa-magnifying-glass"></i> Search Blood
+            </a>
+            <a href="#" class="nav-item" data-section="requests">
+                <i class="fa-solid fa-clock-rotate-left"></i> My Requests
+            </a>
+            <a href="#" class="nav-item" data-section="profile">
+                <i class="fa-solid fa-user"></i> My Profile
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="HomePage.html" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="main-content">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="topbar-title">Dashboard</div>
+            <div class="topbar-user">
+                <span class="user-name">Hello, Rahul 👋</span>
+                <div class="avatar">R</div>
+            </div>
+        </header>
+
+        <!-- ─── SECTION: DASHBOARD ─── -->
+        <section class="section active" id="sec-dashboard">
+
+            <!-- Summary cards -->
+            <div class="stat-row">
+                <div class="stat-card">
+                    <div class="stat-icon red"><i class="fa-solid fa-droplet"></i></div>
+                    <div>
+                        <div class="stat-num">3</div>
+                        <div class="stat-label">Total Requests</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-circle-check"></i></div>
+                    <div>
+                        <div class="stat-num">2</div>
+                        <div class="stat-label">Fulfilled</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon yellow"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <div>
+                        <div class="stat-num">1</div>
+                        <div class="stat-label">Pending</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <div class="stat-num">5</div>
+                        <div class="stat-label">Banks Nearby</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick search -->
+            <div class="card mt-20">
+                <div class="card-header">
+                    <i class="fa-solid fa-magnifying-glass"></i> Quick Blood Search
+                </div>
+                <div class="card-body">
+                    <div class="quick-search-form">
+                        <div class="form-group">
+                            <label>Blood Group</label>
+                            <select id="bloodGroupSelect">
+                                <option value="">Select</option>
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Your Location</label>
+                            <input type="text" placeholder="Enter city or area..." id="locationInput" />
+                        </div>
+                        <div class="form-group">
+                            <label>Priority</label>
+                            <select id="prioritySelect">
+                                <option value="normal">Normal</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                        </div>
+                        <button class="btn-red" onclick="goSearch()">
+                            <i class="fa-solid fa-search"></i> Search Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent activity + nearby banks -->
+            <div class="two-col mt-20">
+
+                <!-- Recent requests -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-clock-rotate-left"></i> Recent Requests
+                    </div>
+                    <div class="card-body">
+                        <table class="simple-table">
+                            <thead>
+                                <tr>
+                                    <th>Blood</th>
+                                    <th>Location</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="blood-badge">B+</span></td>
+                                    <td>AIIMS, Delhi</td>
+                                    <td>28 Feb 2026</td>
+                                    <td><span class="status fulfilled">Fulfilled</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="blood-badge">B+</span></td>
+                                    <td>Civil Hospital, Delhi</td>
+                                    <td>14 Feb 2026</td>
+                                    <td><span class="status fulfilled">Fulfilled</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="blood-badge">B+</span></td>
+                                    <td>Safdarjung, Delhi</td>
+                                    <td>01 Mar 2026</td>
+                                    <td><span class="status pending">Pending</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Nearby banks -->
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-hospital"></i> Nearby Blood Banks
+                    </div>
+                    <div class="card-body">
+                        <ul class="bank-list">
+                            <li>
+                                <div class="bank-info">
+                                    <span class="bank-name">AIIMS Blood Bank</span>
+                                    <span class="bank-loc"><i class="fa-solid fa-location-dot"></i> 1.2 km</span>
+                                </div>
+                                <span class="avail-dot green-dot"></span>
+                            </li>
+                            <li>
+                                <div class="bank-info">
+                                    <span class="bank-name">Safdarjung Hospital</span>
+                                    <span class="bank-loc"><i class="fa-solid fa-location-dot"></i> 3.5 km</span>
+                                </div>
+                                <span class="avail-dot green-dot"></span>
+                            </li>
+                            <li>
+                                <div class="bank-info">
+                                    <span class="bank-name">RML Hospital</span>
+                                    <span class="bank-loc"><i class="fa-solid fa-location-dot"></i> 4.0 km</span>
+                                </div>
+                                <span class="avail-dot yellow-dot"></span>
+                            </li>
+                            <li>
+                                <div class="bank-info">
+                                    <span class="bank-name">Sir Ganga Ram</span>
+                                    <span class="bank-loc"><i class="fa-solid fa-location-dot"></i> 5.1 km</span>
+                                </div>
+                                <span class="avail-dot red-dot"></span>
+                            </li>
+                            <li>
+                                <div class="bank-info">
+                                    <span class="bank-name">Fortis Hospital</span>
+                                    <span class="bank-loc"><i class="fa-solid fa-location-dot"></i> 6.3 km</span>
+                                </div>
+                                <span class="avail-dot green-dot"></span>
+                            </li>
+                        </ul>
+                        <div class="dot-legend">
+                            <span><span class="avail-dot green-dot"></span> Available</span>
+                            <span><span class="avail-dot yellow-dot"></span> Limited</span>
+                            <span><span class="avail-dot red-dot"></span> Not Available</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /two-col -->
+
+        </section>
+        <!-- ─── SECTION: REQUESTS ─── -->
+        <section class="section" id="sec-requests">
+            <div class="card">
+                <div class="card-header"><i class="fa-solid fa-clock-rotate-left"></i> All My Requests</div>
+                <div class="card-body">
+                    <table class="simple-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Blood Group</th>
+                                <th>Location</th>
+                                <th>Priority</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><span class="blood-badge">B+</span></td>
+                                <td>AIIMS, Delhi</td>
+                                <td><span class="priority-badge normal">Normal</span></td>
+                                <td>28 Feb 2026</td>
+                                <td><span class="status fulfilled">Fulfilled</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><span class="blood-badge">B+</span></td>
+                                <td>Civil Hospital, Delhi</td>
+                                <td><span class="priority-badge normal">Normal</span></td>
+                                <td>14 Feb 2026</td>
+                                <td><span class="status fulfilled">Fulfilled</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><span class="blood-badge">B+</span></td>
+                                <td>Safdarjung, Delhi</td>
+                                <td><span class="priority-badge urgent">Urgent</span></td>
+                                <td>01 Mar 2026</td>
+                                <td><span class="status pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── SECTION: PROFILE ─── -->
+        <section class="section" id="sec-profile">
+            <div class="card" style="max-width:520px;">
+                <div class="card-header"><i class="fa-solid fa-user"></i> My Profile</div>
+                <div class="card-body">
+                    <div class="profile-avatar-big">R</div>
+                    <div class="form-group mt-20">
+                        <label>Full Name</label>
+                        <input type="text" value="Rahul Kumar" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="rahul@example.com" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" value="+91 98765 43210" />
+                    </div>
+                    <div class="form-group">
+                        <label>Blood Group</label>
+                        <select>
+                            <option>B+</option>
+                            <option>A+</option>
+                            <option>O+</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" value="New Delhi, India" />
+                    </div>
+                    <button class="btn-red" style="margin-top:10px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main><!-- /main-content -->
+
+    <script>
+        // ── Sidebar toggle (mobile) ──
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // ── Section switching via sidebar links ──
+        document.querySelectorAll('.nav-item[data-section]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var target = this.getAttribute('data-section');
+
+                // Update active nav
+                document.querySelectorAll('.nav-item').forEach(function (l) { l.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Update active section
+                document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+                var sec = document.getElementById('sec-' + target);
+                if (sec) sec.classList.add('active');
+
+                // Update topbar title
+                document.querySelector('.topbar-title').textContent =
+                    target.charAt(0).toUpperCase() + target.slice(1).replace('-', ' ');
+
+                // Close sidebar on mobile after click
+                document.getElementById('sidebar').classList.remove('open');
+            });
+        });
+
+        // ── Quick search ──
+        function goSearch() {
+            var bg = document.getElementById('bloodGroupSelect').value;
+            var loc = document.getElementById('locationInput').value.trim();
+            var pri = document.getElementById('prioritySelect').value;
+            if (!bg) { alert('Please select a blood group.'); return; }
+            if (!loc) { alert('Please enter your location.'); return; }
+            window.location.href = 'BloodSearchpage.html?bg=' + encodeURIComponent(bg)
+                + '&loc=' + encodeURIComponent(loc)
+                + '&priority=' + pri;
+        }
+    </script>
+
+</body>
+
+</html>

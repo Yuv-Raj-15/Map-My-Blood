@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Blood | Map My Blood</title>
+    <link rel="icon" href="Images/new logo.png" />
+    <link rel="stylesheet" href="BloodSearchpage.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <!-- ── NAVBAR ── -->
+    <nav class="navbar">
+        <a href="HomePage.html" class="nav-logo">
+            <img src="Images/new logo.png" alt="Logo" />
+            Map My <strong>Blood</strong>
+        </a>
+        <div class="nav-links">
+            <a href="UserDashBoard.html">Dashboard</a>
+            <a href="HomePage.html" class="btn-nav-logout">Logout</a>
+        </div>
+    </nav>
+
+    <!-- ── SEARCH PANEL ── -->
+    <div class="page-wrap">
+
+        <div class="search-panel">
+            <h2><i class="fa-solid fa-magnifying-glass" style="color:#c0392b;"></i> Find Blood Near You</h2>
+            <p>Enter your details below. We'll show verified blood banks near you with available stock.</p>
+
+            <div class="search-form">
+
+                <div class="field-group">
+                    <label for="bg">Blood Group Required</label>
+                    <select id="bg">
+                        <option value="">-- Select Blood Group --</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="location">Your Location / City</label>
+                    <div class="input-row">
+                        <input type="text" id="location" placeholder="e.g. New Delhi, Connaught Place..." />
+                        <button class="geo-btn" onclick="detectLocation()" title="Detect my location">
+                            <i class="fa-solid fa-location-crosshairs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label for="units">Units Needed</label>
+                    <input type="number" id="units" min="1" max="20" value="1" />
+                </div>
+
+                <div class="field-group">
+                    <label>Priority</label>
+                    <div class="radio-row">
+                        <label class="radio-opt">
+                            <input type="radio" name="priority" value="normal" checked /> Normal
+                        </label>
+                        <label class="radio-opt urgent-opt">
+                            <input type="radio" name="priority" value="urgent" /> 🚨 Urgent
+                        </label>
+                    </div>
+                </div>
+
+                <button class="btn-search" id="searchBtn" onclick="searchBlood()">
+                    <i class="fa-solid fa-search"></i> Search Blood Banks
+                </button>
+
+            </div>
+        </div>
+
+        <!-- ── RESULTS SECTION ── -->
+        <div class="results-area" id="resultsArea" style="display:none;">
+
+            <div class="results-header">
+                <div id="resultsTitle">Results</div>
+                <div id="resultsMeta" class="results-meta"></div>
+            </div>
+
+            <!-- Urgent notice -->
+            <div class="urgent-notice" id="urgentNotice" style="display:none;">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Urgent request! Please call the blood bank directly for fastest service.</span>
+            </div>
+
+            <!-- Results list -->
+            <div id="resultsList"></div>
+
+            <!-- Map placeholder -->
+            <div class="map-placeholder" id="mapBox">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <div>
+                    <strong>Map View</strong><br />
+                    <span>In the live version, an interactive Google Map will appear here<br />
+                        showing the blood bank locations with directions.</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Empty state (before search) -->
+        <div class="empty-state" id="emptyState">
+            <i class="fa-solid fa-droplet"></i>
+            <p>Fill in the form and click <strong>Search</strong> to find blood banks near you.</p>
+        </div>
+
+        <!-- No results state -->
+        <div class="no-results" id="noResults" style="display:none;">
+            <i class="fa-solid fa-circle-xmark"></i>
+            <p>No blood banks found with <strong id="nrGroup"></strong> near <strong id="nrLoc"></strong>.<br />
+                Try a different location or blood group.</p>
+        </div>
+
+    </div><!-- /page-wrap -->
+
+    <!-- Toast for geolocation -->
+    <div class="toast hidden" id="geoToast">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="geoMsg">Detecting location...</span>
+    </div>
+
+    <script>
+        // ─────────────────────────────────────────────
+        //  Mock blood bank database
+        //  In production this would be a real API call.
+        // ─────────────────────────────────────────────
+        var bloodBanks = [
+            {
+                name: 'AIIMS Blood Bank',
+                address: 'Sri Aurobindo Marg, Ansari Nagar, New Delhi',
+                dist: '1.2',
+                phone: '011-26588500',
+                stock: {
+                    'A+': 120, 'A-': 18, 'B+': 95, 'B-': 9,
+                    'AB+': 42, 'AB-': 0, 'O+': 210, 'O-': 31
+                }
+            },
+            {
+                name: 'Safdarjung Hospital Blood Bank',
+                address: 'Ansari Nagar West, New Delhi',
+                dist: '3.5',
+                phone: '011-26730000',
+                stock: {
+                    'A+': 60, 'A-': 5, 'B+': 0, 'B-': 3,
+                    'AB+': 18, 'AB-': 2, 'O+': 90, 'O-': 10
+                }
+            },
+            {
+                name: 'Ram Manohar Lohia Hospital',
+                address: 'Baba Kharak Singh Marg, New Delhi',
+                dist: '4.0',
+                phone: '011-23365525',
+                stock: {
+                    'A+': 30, 'A-': 0, 'B+': 45, 'B-': 6,
+                    'AB+': 12, 'AB-': 0, 'O+': 75, 'O-': 8
+                }
+            },
+            {
+                name: 'Sir Ganga Ram Hospital',
+                address: 'Rajinder Nagar, New Delhi',
+                dist: '5.1',
+                phone: '011-25750000',
+                stock: {
+                    'A+': 80, 'A-': 12, 'B+': 0, 'B-': 0,
+                    'AB+': 22, 'AB-': 4, 'O+': 110, 'O-': 19
+                }
+            },
+            {
+                name: 'Fortis Hospital Blood Bank',
+                address: 'Shalimar Bagh, New Delhi',
+                dist: '6.3',
+                phone: '011-45296666',
+                stock: {
+                    'A+': 50, 'A-': 7, 'B+': 35, 'B-': 4,
+                    'AB+': 0, 'AB-': 1, 'O+': 60, 'O-': 14
+                }
+            },
+        ];
+
+        // ── Read URL params (if coming from dashboard quick search) ──
+        window.addEventListener('DOMContentLoaded', function () {
+            var p = new URLSearchParams(window.location.search);
+            if (p.get('bg')) document.getElementById('bg').value = p.get('bg');
+            if (p.get('loc')) document.getElementById('location').value = p.get('loc');
+            if (p.get('priority') === 'urgent') {
+                document.querySelector('input[value="urgent"]').checked = true;
+            }
+            // Auto-trigger search if params were passed
+            if (p.get('bg') && p.get('loc')) {
+                searchBlood();
+            }
+        });
+
+        // ── Main search function ──
+        function searchBlood() {
+            var bg = document.getElementById('bg').value.trim();
+            var location = document.getElementById('location').value.trim();
+            var units = parseInt(document.getElementById('units').value) || 1;
+            var priority = document.querySelector('input[name="priority"]:checked').value;
+
+            if (!bg) { shake('bg'); alert('Please select a blood group.'); return; }
+            if (!location) { shake('location'); alert('Please enter your location.'); return; }
+
+            // Show loading state
+            var btn = document.getElementById('searchBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Searching...';
+            btn.disabled = true;
+
+            // Simulate network delay (remove in real app, replace with fetch())
+            setTimeout(function () {
+                btn.innerHTML = '<i class="fa-solid fa-search"></i> Search Blood Banks';
+                btn.disabled = false;
+
+                var results = bloodBanks.filter(function (bank) {
+                    return bank.stock[bg] >= units;
+                });
+
+                // Sort by distance
+                results.sort(function (a, b) { return parseFloat(a.dist) - parseFloat(b.dist); });
+
+                document.getElementById('emptyState').style.display = 'none';
+                document.getElementById('noResults').style.display = 'none';
+                document.getElementById('resultsArea').style.display = 'none';
+
+                if (results.length === 0) {
+                    document.getElementById('nrGroup').textContent = bg;
+                    document.getElementById('nrLoc').textContent = location;
+                    document.getElementById('noResults').style.display = 'block';
+                    return;
+                }
+
+                renderResults(results, bg, location, units, priority);
+            }, 600);
+        }
+
+        function renderResults(results, bg, location, units, priority) {
+            var area = document.getElementById('resultsArea');
+            var list = document.getElementById('resultsList');
+            var title = document.getElementById('resultsTitle');
+            var meta = document.getElementById('resultsMeta');
+            var urgent = document.getElementById('urgentNotice');
+
+            title.textContent = results.length + ' Blood Bank' + (results.length > 1 ? 's' : '') + ' Found';
+            meta.textContent = bg + ' · ' + units + ' unit(s) needed · near ' + location;
+
+            urgent.style.display = (priority === 'urgent') ? 'flex' : 'none';
+
+            list.innerHTML = '';
+            results.forEach(function (bank) {
+                var avail = bank.stock[bg];
+                var card = document.createElement('div');
+                card.className = 'result-card';
+
+                var stockClass = avail >= 50 ? 'avail-good' : avail >= 15 ? 'avail-ok' : 'avail-low';
+                var stockLabel = avail >= 50 ? 'Good Stock' : avail >= 15 ? 'Limited' : 'Very Low';
+
+                card.innerHTML =
+                    '<div class="rc-left">' +
+                    '<div class="rc-name">' + bank.name + '</div>' +
+                    '<div class="rc-addr"><i class="fa-solid fa-location-dot"></i> ' + bank.address + '</div>' +
+                    '<div class="rc-phone"><i class="fa-solid fa-phone"></i> ' + bank.phone + '</div>' +
+                    '</div>' +
+                    '<div class="rc-right">' +
+                    '<div class="rc-dist"><i class="fa-solid fa-route"></i> ' + bank.dist + ' km</div>' +
+                    '<div class="rc-units">' +
+                    '<span class="blood-badge-lg">' + bg + '</span>' +
+                    '<span class="units-count">' + avail + ' units</span>' +
+                    '<span class="avail-tag ' + stockClass + '">' + stockLabel + '</span>' +
+                    '</div>' +
+                    '<div class="rc-actions">' +
+                    '<a href="https://maps.google.com/?q=' + encodeURIComponent(bank.address) + '" target="_blank" class="btn-dir">' +
+                    '<i class="fa-solid fa-map-location-dot"></i> Get Directions' +
+                    '</a>' +
+                    '<a href="tel:' + bank.phone.replace(/\s/g, '') + '" class="btn-call">' +
+                    '<i class="fa-solid fa-phone"></i> Call' +
+                    '</a>' +
+                    '</div>' +
+                    '</div>';
+
+                list.appendChild(card);
+            });
+
+            area.style.display = 'block';
+        }
+
+        // ── Geolocation ──
+        function detectLocation() {
+            if (!navigator.geolocation) { showToast('Geolocation not supported.'); return; }
+            showToast('Detecting your location...');
+            navigator.geolocation.getCurrentPosition(
+                function (pos) {
+                    document.getElementById('location').value =
+                        pos.coords.latitude.toFixed(4) + ', ' + pos.coords.longitude.toFixed(4);
+                    showToast('Location detected!');
+                    setTimeout(hideToast, 2500);
+                },
+                function () {
+                    showToast('Could not detect location. Please type it.');
+                    setTimeout(hideToast, 3000);
+                }
+            );
+        }
+
+        function showToast(msg) {
+            document.getElementById('geoMsg').textContent = msg;
+            document.getElementById('geoToast').classList.remove('hidden');
+        }
+
+        function hideToast() {
+            document.getElementById('geoToast').classList.add('hidden');
+        }
+
+        // ── Shake animation on empty required field ──
+        function shake(fieldId) {
+            var el = document.getElementById(fieldId);
+            el.classList.add('shake');
+            setTimeout(function () { el.classList.remove('shake'); }, 600);
+        }
+    </script>
+
+</body>
+
+</html>
