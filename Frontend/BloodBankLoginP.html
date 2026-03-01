@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map My Blood Login Page </title>
+    <link rel="stylesheet" href="BloodBankloginP.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="Images\new logo.png">
+</head>
+<body>
+    <div class="auth-card">
+        <div class="header">
+            <div class="logo-container">
+                <img src="Images\new logo.png" alt="Logo" class="logo">
+            </div>
+            <h1>Map My Blood</h1>
+            <p>Find Blood on one Tap</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active" id="loginTab">Login</button>
+            <button class="tab" id="signupTab">Sign Up</button>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+            
+              <div class="input-group">
+                <label>Registration Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" placeholder="Enter Registration Number">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">Login</button>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+        </form>
+
+        <form id="signupForm" class="auth-form hidden">
+            <div class="input-group">
+                <label>Organization Name</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" placeholder="Enter Organization name" required>
+                </div>
+            </div>
+
+             <div class="input-group">
+                <label>Unique Hospital ID (UHID)</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" placeholder="Enter UHID " required>
+                </div>
+            </div>
+
+              <div class="input-group">
+                <label>Registration Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" placeholder="Enter Registration Number">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" placeholder="Enter email" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" placeholder="Enter phone number">
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Location</label>
+                <div class="location-row">
+                    <div class="input-field">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" id="locationInput" placeholder="Address or Coordinates">
+                    </div>
+                    <button type="button" class="geo-btn" id="detectLocationBtn">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Create password" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" placeholder="Confirm password" required>
+                </div>
+            </div>
+
+            <div class="terms-container">
+                <div class="radio-wrapper">
+                    <input type="checkbox" id="termsCheck" required>
+                    <label for="termsCheck">I agree to the Terms & Conditions and Privacy Policy.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Sign Up</button>
+        </form>
+
+        <div class="footer-section">
+            <p class="terms-footer">By continuing, you agree to our <a href="#">Terms & Privacy Policy</a>.</p>
+            <div class="divider"><span>Or continue with</span></div>
+            <button class="btn-google">
+                <img src="Images\googleLogo.webp" alt="Google">
+                Sign in with Google
+            </button>
+        </div>
+    </div>
+
+    <div id="locationToast" class="toast hidden">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="toastMessage">Detecting location...</span>
+    </div>
+
+    <script src="BBLP.js"></script>
+</body>
+</html>
