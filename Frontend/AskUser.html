@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map My Blood | Who Are You?</title>
+    <link rel="icon" href="Images/new logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* ───────────────────────────────────────────
+       RESET & BASE
+    ─────────────────────────────────────────── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --red: #e63946;
+            --red-dark: #c1121f;
+            --red-glow: rgba(230, 57, 70, 0.35);
+            --blue: #2563eb;
+            --blue-dark: #1d4ed8;
+            --blue-glow: rgba(37, 99, 235, 0.35);
+            --bg-dark: #0d0d14;
+            --card-bg: rgba(255, 255, 255, 0.055);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text-light: #f1f5f9;
+            --text-muted: #94a3b8;
+            --radius: 22px;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* ───────────────────────────────────────────
+       ANIMATED BACKGROUND
+    ─────────────────────────────────────────── */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 10% 20%, rgba(230, 57, 70, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 70% 50% at 90% 80%, rgba(37, 99, 235, 0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 60% at 50% 50%, rgba(100, 10, 30, 0.12) 0%, transparent 70%),
+                #0d0d14;
+            animation: bgShift 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes bgShift {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(20deg);
+            }
+        }
+
+        /* Floating blobs */
+        .blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.18;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBlob 10s ease-in-out infinite alternate;
+        }
+
+        .blob-1 {
+            width: 420px;
+            height: 420px;
+            background: var(--red);
+            top: -100px;
+            left: -80px;
+            animation-duration: 11s;
+        }
+
+        .blob-2 {
+            width: 360px;
+            height: 360px;
+            background: var(--blue);
+            bottom: -80px;
+            right: -60px;
+            animation-duration: 14s;
+            animation-direction: alternate-reverse;
+        }
+
+        .blob-3 {
+            width: 240px;
+            height: 240px;
+            background: #9333ea;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 9s;
+        }
+
+        @keyframes floatBlob {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                transform: translate(30px, 20px) scale(1.1);
+            }
+        }
+
+        /* ───────────────────────────────────────────
+       MAIN LAYOUT
+    ─────────────────────────────────────────── */
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        /* ───────────────────────────────────────────
+       LOGO / HEADER
+    ─────────────────────────────────────────── */
+        .logo-area {
+            text-align: center;
+            margin-bottom: 12px;
+            animation: fadeDown 0.6s ease both;
+        }
+
+        .logo-area img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 18px var(--red-glow));
+            animation: pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 12px var(--red-glow));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 28px rgba(230, 57, 70, 0.7));
+            }
+        }
+
+        .logo-area h1 {
+            margin-top: 10px;
+            font-size: 1.55rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-area h1 span {
+            color: var(--red);
+        }
+
+        /* ───────────────────────────────────────────
+       ACTION BADGE  (LOGIN / SIGN UP label)
+    ─────────────────────────────────────────── */
+        .action-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            animation: fadeDown 0.65s 0.1s ease both;
+        }
+
+        /* ───────────────────────────────────────────
+       HEADLINE
+    ─────────────────────────────────────────── */
+        .headline {
+            text-align: center;
+            margin-bottom: 10px;
+            animation: fadeDown 0.65s 0.15s ease both;
+        }
+
+        .headline h2 {
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+        }
+
+        .headline p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 380px;
+            margin-inline: auto;
+            line-height: 1.6;
+        }
+
+        /* ───────────────────────────────────────────
+       CARDS ROW
+    ─────────────────────────────────────────── */
+        .cards-row {
+            display: flex;
+            gap: 24px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeUp 0.7s 0.25s ease both;
+        }
+
+        /* ───────────────────────────────────────────
+       SELECTION CARD
+    ─────────────────────────────────────────── */
+        .user-card {
+            position: relative;
+            width: 280px;
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 36px 28px 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Subtle shimmer overlay */
+        .user-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* Glow ring on hover */
+        .user-card::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: calc(var(--radius) + 1px);
+            opacity: 0;
+            transition: opacity 0.35s ease;
+            pointer-events: none;
+        }
+
+        .user-card.user-type::after {
+            background: linear-gradient(135deg, var(--red), transparent 70%);
+        }
+
+        .user-card.bank-type::after {
+            background: linear-gradient(135deg, var(--blue), transparent 70%);
+        }
+
+        .user-card:hover {
+            transform: translateY(-8px) scale(1.025);
+            border-color: transparent;
+        }
+
+        .user-card:hover::after {
+            opacity: 0.55;
+        }
+
+        .user-card.user-type:hover {
+            box-shadow: 0 24px 60px var(--red-glow), 0 0 0 1px rgba(230, 57, 70, 0.3);
+        }
+
+        .user-card.bank-type:hover {
+            box-shadow: 0 24px 60px var(--blue-glow), 0 0 0 1px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Icon circle */
+        .card-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 20px;
+            transition: var(--transition);
+        }
+
+        .user-type .card-icon {
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.25), rgba(230, 57, 70, 0.08));
+            border: 1.5px solid rgba(230, 57, 70, 0.35);
+            color: var(--red);
+        }
+
+        .bank-type .card-icon {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(37, 99, 235, 0.08));
+            border: 1.5px solid rgba(37, 99, 235, 0.35);
+            color: #60a5fa;
+        }
+
+        .user-card:hover .card-icon {
+            transform: scale(1.1) rotate(-4deg);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.3px;
+        }
+
+        .card-desc {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        /* Tag pills */
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 26px;
+        }
+
+        .tag {
+            padding: 3px 10px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.4px;
+        }
+
+        .user-type .tag {
+            background: rgba(230, 57, 70, 0.14);
+            color: #f87171;
+            border: 1px solid rgba(230, 57, 70, 0.25);
+        }
+
+        .bank-type .tag {
+            background: rgba(37, 99, 235, 0.14);
+            color: #93c5fd;
+            border: 1px solid rgba(37, 99, 235, 0.25);
+        }
+
+        /* CTA button inside card */
+        .card-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.2px;
+        }
+
+        .user-type .card-btn {
+            background: linear-gradient(135deg, var(--red), var(--red-dark));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(230, 57, 70, 0.35);
+        }
+
+        .bank-type .card-btn {
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.12);
+        }
+
+        /* ───────────────────────────────────────────
+       BACK LINK
+    ─────────────────────────────────────────── */
+        .back-link {
+            margin-top: 32px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+            animation: fadeUp 0.7s 0.35s ease both;
+        }
+
+        .back-link:hover {
+            color: var(--text-light);
+        }
+
+        /* ───────────────────────────────────────────
+       ANIMATIONS
+    ─────────────────────────────────────────── */
+        @keyframes fadeDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ───────────────────────────────────────────
+       RESPONSIVE
+    ─────────────────────────────────────────── */
+        @media (max-width: 620px) {
+            .cards-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .user-card {
+                width: 100%;
+                max-width: 340px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated background -->
+    <div class="bg-gradient"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <!-- Main content -->
+    <div class="page-wrapper">
+
+        <!-- Logo -->
+        <div class="logo-area">
+            <img src="Images/new logo.png" alt="Map My Blood Logo" />
+            <h1>Map My <span>BLOOD</span></h1>
+        </div>
+
+        <!-- Action badge — filled by JS -->
+        <div class="action-badge" id="actionBadge">
+            <i class="fa-solid fa-circle-dot"></i>
+            <span id="badgeLabel">Getting Started</span>
+        </div>
+
+        <!-- Headline — filled by JS -->
+        <div class="headline">
+            <h2 id="mainHeading">Who are you?</h2>
+            <p id="mainSubtext">Tell us about yourself so we can take you to the right place.</p>
+        </div>
+
+        <!-- Cards -->
+        <div class="cards-row">
+
+            <!-- Normal User card -->
+            <div class="user-card user-type" id="userCard">
+                <div class="card-icon">
+                    <i class="fa-solid fa-user-heart"></i>
+                </div>
+                <div class="card-title">I'm a User</div>
+                <div class="card-desc">
+                    Looking for blood, tracking donors, or managing your personal health profile.
+                </div>
+                <div class="tag-row">
+                    <span class="tag">Find Blood</span>
+                    <span class="tag">Donor Search</span>
+                    <span class="tag">Personal</span>
+                </div>
+                <button class="card-btn" id="userBtn">
+                    Continue as User &nbsp;<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Blood Bank / Hospital card -->
+            <div class="user-card bank-type" id="bankCard">
+                <div class="card-icon">
+                    <i class="fa-solid fa-hospital"></i>
+                </div>
+                <div class="card-title">Blood Bank / Hospital</div>
+                <div class="card-desc">
+                    Manage blood stock, post availability, and connect with those in need.
+                </div>
+                <div class="tag-row">
+                    <span class="tag">Stock Manager</span>
+                    <span class="tag">Organisation</span>
+                    <span class="tag">Dashboard</span>
+                </div>
+                <button class="card-btn" id="bankBtn">
+                    Continue as Organisation &nbsp;<i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div><!-- /cards-row -->
+
+        <!-- Back to homepage -->
+        <a href="HomePage.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+
+    </div><!-- /page-wrapper -->
+
+    <script>
+        // ─────────────────────────────────────────────
+        //  Read ?action=login  OR  ?action=signup
+        // ─────────────────────────────────────────────
+        const params = new URLSearchParams(window.location.search);
+        const action = params.get('action') || 'login'; // default: login
+
+        const isLogin = action === 'login';
+        const isSignup = action === 'signup';
+
+        // ─────────────────────────────────────────────
+        //  Customise UI text based on action
+        // ─────────────────────────────────────────────
+        const badgeLabel = document.getElementById('badgeLabel');
+        const mainHeading = document.getElementById('mainHeading');
+        const mainSubtext = document.getElementById('mainSubtext');
+        const userBtn = document.getElementById('userBtn');
+        const bankBtn = document.getElementById('bankBtn');
+
+        if (isSignup) {
+            badgeLabel.textContent = 'Sign Up';
+            mainHeading.textContent = 'Create Your Account';
+            mainSubtext.textContent = 'Choose your account type to get started on Map My Blood.';
+            userBtn.innerHTML = 'Sign Up as User &nbsp;<i class="fa-solid fa-arrow-right"></i>';
+            bankBtn.innerHTML = 'Sign Up as Organisation &nbsp;<i class="fa-solid fa-arrow-right"></i>';
+        } else {
+            badgeLabel.textContent = 'Login';
+            mainHeading.textContent = 'Welcome Back!';
+            mainSubtext.textContent = 'Tell us who you are so we can take you to the right login portal.';
+            userBtn.innerHTML = 'Login as User &nbsp;<i class="fa-solid fa-arrow-right"></i>';
+            bankBtn.innerHTML = 'Login as Organisation &nbsp;<i class="fa-solid fa-arrow-right"></i>';
+        }
+
+        // ─────────────────────────────────────────────
+        //  Routing logic
+        //  ?tab=signup → BBLP.js will auto-activate
+        //                 the Sign Up tab on arrival
+        // ─────────────────────────────────────────────
+        function navigate(destination) {
+            // Small ripple delay for a premium feel
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 220);
+        }
+
+        // User card / button → userLoginPage.html
+        document.getElementById('userCard').addEventListener('click', function (e) {
+            // Don't double-fire if button itself was clicked
+            if (e.target.closest('#userBtn')) return;
+            navigate(isSignup ? 'userLoginPage.html?tab=signup' : 'userLoginPage.html');
+        });
+
+        document.getElementById('userBtn').addEventListener('click', function () {
+            addRipple(this);
+            navigate(isSignup ? 'userLoginPage.html?tab=signup' : 'userLoginPage.html');
+        });
+
+        // Bank card / button → BloodBankLoginP.html
+        document.getElementById('bankCard').addEventListener('click', function (e) {
+            if (e.target.closest('#bankBtn')) return;
+            navigate(isSignup ? 'BloodBankLoginP.html?tab=signup' : 'BloodBankLoginP.html');
+        });
+
+        document.getElementById('bankBtn').addEventListener('click', function () {
+            addRipple(this);
+            navigate(isSignup ? 'BloodBankLoginP.html?tab=signup' : 'BloodBankLoginP.html');
+        });
+
+        // ─────────────────────────────────────────────
+        //  Ripple effect on button click
+        // ─────────────────────────────────────────────
+        function addRipple(btn) {
+            const ripple = document.createElement('span');
+            ripple.style.cssText = `
+        position:absolute; border-radius:50%; transform:scale(0);
+        background:rgba(255,255,255,0.3); pointer-events:none;
+        width:120px; height:120px;
+        left:50%; top:50%; margin:-60px 0 0 -60px;
+        animation: rippleAnim 0.55s linear;
+      `;
+            // ensure button has position:relative for ripple
+            btn.style.position = 'relative';
+            btn.style.overflow = 'hidden';
+            btn.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+        }
+
+        // Inject ripple keyframe dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+      @keyframes rippleAnim {
+        to { transform: scale(4); opacity: 0; }
+      }
+    `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>
