@@ -1,0 +1,683 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Map My Blood — India's Blood Discovery Platform</title>
+  <meta name="description"
+    content="Learn about Map My Blood — a free, student-built platform connecting blood seekers with verified blood banks across India.">
+  <link rel="icon" href="new logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-2: #f8fafc;
+      --bg-3: #f1f5f9;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --border-2: #cbd5e1;
+      --red: #dc2626;
+      --red-dark: #b91c1c;
+      --red-light: #fee2e2;
+      --red-mid: #fca5a5;
+      --text: #0f172a;
+      --text-2: #334155;
+      --muted: #64748b;
+      --green: #16a34a;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --transition: all 0.25s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(20px, 5vw, 80px);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .nav-logo img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .nav-logo .blood-word {
+      color: var(--red);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link {
+      padding: 7px 13px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: var(--bg-3);
+    }
+
+    .btn-find {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--red);
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+      transition: var(--transition);
+    }
+
+    .btn-find:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background:
+        linear-gradient(160deg, rgba(220, 38, 38, 0.08) 0%, rgba(0, 0, 0, 0) 60%),
+        url("https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1400&q=80") center/cover;
+      padding: 72px clamp(20px, 6vw, 100px);
+      position: relative;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.92) 100%);
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .page-hero .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 16px;
+      border-radius: 999px;
+      background: var(--red-light);
+      border: 1px solid var(--red-mid);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--red-dark);
+      margin-bottom: 16px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+
+    .page-hero h1 .red {
+      color: var(--red);
+    }
+
+    .page-hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.75;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 60px);
+    }
+
+    /* ── SECTIONS ── */
+    .page-section {
+      padding: clamp(44px, 6vh, 72px) 0;
+    }
+
+    .page-section-alt {
+      background: var(--bg-2);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      background: var(--red-light);
+      border: 1px solid var(--red-mid);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--red-dark);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .section-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    /* ── INFO CARD GRID ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .info-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .info-card:hover {
+      border-color: var(--red-mid);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .info-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--red-light);
+      color: var(--red);
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .info-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: var(--text);
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── HERO IMAGES ── */
+    .hero-img {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-top: 22px;
+      object-fit: cover;
+      max-height: 380px;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* ── TERMS / UL ── */
+    .styled-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+
+    .styled-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .styled-list li i {
+      color: var(--red);
+      font-size: 12px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── DETAILS TABLE ── */
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 16px;
+    }
+
+    .org-box {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .org-box .field {
+      margin-bottom: 12px;
+    }
+
+    .org-box .field:last-child {
+      margin-bottom: 0;
+    }
+
+    .org-box .field-label {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .org-box .field-val {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── LINKS ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
+    }
+
+    .link-pill {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 16px;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .link-pill:hover {
+      background: var(--red-light);
+      border-color: var(--red-mid);
+      color: var(--red-dark);
+    }
+
+    .link-pill i {
+      color: var(--red);
+      font-size: 13px;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--text);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 28px clamp(20px, 4vw, 60px);
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .page-footer span {
+      color: #fca5a5;
+    }
+
+    a {
+      color: var(--red);
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width:700px) {
+      .nav-links {
+        display: none;
+      }
+
+      div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="new logo.png" alt="Map My Blood Logo">
+      Map My <span class="blood-word">BLOOD</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      
+      
+      
+      
+    </div>
+  </nav>
+
+  
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="hero-tag"><i class="fa-solid fa-circle-info"></i> About Us</div>
+      <h1>About <span class="red">Map My Blood</span></h1>
+      <p>A verified blood discovery and direction platform that helps users find nearby blood availability instantly,
+        while enabling blood banks to maintain real-time stock data safely and transparently.</p>
+    </div>
+  </div>
+
+  
+  <section class="page-section">
+    <div class="container">
+      <div class="section-tag"><i class="fa-solid fa-star"></i> Our Mission</div>
+      <h2 class="section-title">What is Map My Blood?</h2>
+      <p class="section-sub">Map My Blood is a digital support platform built for India — connecting blood seekers,
+        verified blood banks, and hospitals. A user enters location, blood group, and urgency level. Our system filters
+        nearby availability and displays matching results with map-based directions.</p>
+
+      <p style="font-size:14px; color:var(--muted); line-height:1.75; margin-bottom:16px;">
+        The platform is accessible to both public users and medical stakeholders. Separate dashboards ensure role-based
+        access: users search and request information, while blood banks manage stock updates. Only original and verified
+        institutions are shown in search results. Built by college students as a free public service — because every
+        second in an emergency counts.
+      </p>
+
+      <img class="hero-img"
+        src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=1400&q=80"
+        alt="Blood donation support">
+    </div>
+  </section>
+
+  
+  <section class="page-section page-section-alt">
+    <div class="container">
+      <div class="section-tag"><i class="fa-solid fa-gears"></i> Process</div>
+      <h2 class="section-title">How the Platform Works</h2>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <h3>User Input</h3>
+          <p>Users provide location, required blood type, and urgency status (Normal / High / Critical).</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon"><i class="fa-solid fa-database"></i></div>
+          <h3>Database Sorting</h3>
+          <p>Our system fetches nearby blood units by type and priority from verified sources only.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon"><i class="fa-solid fa-map"></i></div>
+          <h3>Map + Direction</h3>
+          <p>Results include branch details, distance, contact info, and one-click Google Maps directions.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon"><i class="fa-solid fa-chart-bar"></i></div>
+          <h3>Live Inventory Control</h3>
+          <p>Only verified blood banks and hospitals can update their own blood stock via their secure dashboard.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="page-section">
+    <div class="container">
+      <div class="section-tag"><i class="fa-solid fa-file-pen"></i> Registration</div>
+      <h2 class="section-title">Registration Criteria</h2>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:16px;">
+        <div>
+          <h3 style="font-size:1rem; font-weight:700; margin-bottom:16px; color:var(--text);">
+            <i class="fa-solid fa-user" style="color:var(--red);margin-right:8px;"></i> For Users
+          </h3>
+          <ul class="styled-list">
+            <li><i class="fa-solid fa-check"></i> Valid mobile number and email verification</li>
+            <li><i class="fa-solid fa-check"></i> Basic location permission for nearby search and route assistance</li>
+            <li><i class="fa-solid fa-check"></i> Acceptance of terms, privacy policy, and emergency disclaimer</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:1rem; font-weight:700; margin-bottom:16px; color:var(--text);">
+            <i class="fa-solid fa-hospital" style="color:#60a5fa;margin-right:8px;"></i> For Blood Banks / Hospitals
+          </h3>
+          <ul class="styled-list">
+            <li><i class="fa-solid fa-check"></i> Government registration certificate and operating license</li>
+            <li><i class="fa-solid fa-check"></i> Authorized representative ID proof and institution verification
+              documents</li>
+            <li><i class="fa-solid fa-check"></i> Branch address validation and emergency contact submission</li>
+            <li><i class="fa-solid fa-check"></i> Approval process by platform verification team before dashboard
+              activation</li>
+          </ul>
+        </div>
+      </div>
+
+      <p
+        style="font-size:12px; color:var(--muted); padding:14px 18px; background:rgba(230,57,70,0.06); border:1px solid rgba(230,57,70,0.15); border-radius:10px; margin-top:16px;">
+        <i class="fa-solid fa-lock" style="color:var(--red);margin-right:6px;"></i>
+        <strong style="color:var(--text);">Note:</strong> Only original and verified blood banks are published in public
+        search results.
+      </p>
+    </div>
+  </section>
+
+  
+  <section class="page-section page-section-alt">
+    <div class="container">
+      <div class="section-tag"><i class="fa-solid fa-scale-balanced"></i> Legal</div>
+      <h2 class="section-title">Terms & Conditions (Summary)</h2>
+      <ul class="styled-list">
+        <li><i class="fa-solid fa-circle-exclamation"></i> Platform provides location and availability support; final
+          confirmation must be done by direct call to the blood bank.</li>
+        <li><i class="fa-solid fa-circle-exclamation"></i> Stock can change rapidly in emergencies; displayed units are
+          based on latest updates by institutions.</li>
+        <li><i class="fa-solid fa-circle-exclamation"></i> Any misuse, fake listing, or manipulated stock entry can lead
+          to immediate account suspension.</li>
+        <li><i class="fa-solid fa-circle-exclamation"></i> Users must not submit false emergency requests or misuse
+          institution contact numbers.</li>
+        <li><i class="fa-solid fa-circle-exclamation"></i> Hospitals and blood banks are solely responsible for accuracy
+          of their own inventory entries.</li>
+      </ul>
+
+      <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1400&q=80"
+        alt="Hospital corridor" class="hero-img" style="margin-top:28px; max-height:280px;">
+    </div>
+  </section>
+
+  
+  <section class="page-section">
+    <div class="container">
+      <div class="section-tag"><i class="fa-solid fa-building"></i> Organisation</div>
+      <h2 class="section-title">Organisation Details</h2>
+      <p class="section-sub">Platform details and key stakeholders (Demonstration Data)</p>
+
+      <div class="org-grid">
+        <div class="org-box">
+          <div class="field">
+            <div class="field-label">Parent Company</div>
+            <div class="field-val">LifeLink Health Technologies Pvt. Ltd.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Founder</div>
+            <div class="field-val">XYZ Sharma </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Co-Founder</div>
+            <div class="field-val">Yuvraj Rauniyar </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Partner</div>
+            <div class="field-val">RedcCross Society </div>
+          </div>
+        </div>
+        <div class="org-box">
+          <div class="field">
+            <div class="field-label">In Partnership With</div>
+            <div class="field-val">National Blood Support Network (NBSN)</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Region</div>
+            <div class="field-val">India</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Head Office</div>
+            <div class="field-val">Hanamkonda, Telangana, India.
+</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Support Email</div>
+            <div class="field-val">support@mapmyblood.in</div>
+          </div>
+        </div>
+        <div class="org-box">
+          <div class="field">
+            <div class="field-label">Contact Number</div>
+            <div class="field-val">+91-90000-12345</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Emergency Helpline</div>
+            <div class="field-val" style="color:var(--red);">+91-90000-54321</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Active Branches</div>
+            <div class="field-val">Hanamkonda, Telangana, India.
+</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Availability</div>
+            <div class="field-val" style="color:#22c55e;">24×7 Digital Support</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="page-section page-section-alt">
+    <div class="container">
+      <div class="section-tag"><i class="fa-solid fa-shield-halved"></i> Privacy</div>
+      <h2 class="section-title">Privacy Policy & Cookies</h2>
+      <p style="font-size:14px; color:var(--muted); margin-bottom:20px; line-height:1.75;">
+        We collect only necessary personal data such as login credentials, location search input, and dashboard activity
+        logs to provide blood discovery services securely.
+      </p>
+      <ul class="styled-list">
+        <li><i class="fa-solid fa-check"></i> Location data is used to show nearest available blood sources and
+          directions.</li>
+        <li><i class="fa-solid fa-check"></i> Cookies are used for login session management, language preference, and
+          analytics.</li>
+        <li><i class="fa-solid fa-check"></i> We do not sell sensitive personal data to third-party marketers.</li>
+        <li><i class="fa-solid fa-check"></i> Data is processed under applicable Indian data protection and healthcare
+          sensitivity practices.</li>
+      </ul>
+    </div>
+  </section>
+
+  
+  <section class="page-section">
+    <div class="container">
+      
+      
+        
+
+      
+    </div>
+  </section>
+
+  
+  <footer class="page-footer">
+    &copy; 2026 Map My Blood India — Built to support faster blood access in critical moments.
+    Made with <span>♥</span> by NIT Warangal Students.
+  </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank Login | Map My Blood</title>
+    <meta name="description"
+        content="Blood bank and hospital login portal for Map My Blood — manage your blood stock and incoming requests.">
+    <link rel="stylesheet" href="BloodBankloginP.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="new logo.png">
+</head>
+
+<body>
+    <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+    <div class="auth-card">
+        <div class="header">
+            <div class="logo-container">
+                <img src="new logo.png" alt="Logo" class="logo">
+            </div>
+            <h1>Map My Blood</h1>
+            <p>Find Blood on one Tap</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active" id="loginTab">Login</button>
+            <button class="tab" id="signupTab">Sign Up</button>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+
+            <div class="input-group">
+                <label>Registration Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" placeholder="Enter Registration Number" id="regnoinputlogin">
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="passwordinputlogin" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <button type="submit" class="btn-primary">Login</button>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+        </form>
+
+        <form id="signupForm" class="auth-form hidden">
+            <div class="input-group">
+                <label>Organization Name</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="orgnameinput" placeholder="Enter Organization name" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Registration Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel"id="regnoinput"  placeholder="Enter Registration Number">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Email</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="emailinput" placeholder="Enter email" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Phone Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" id="phoneinput" placeholder="Enter phone number">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Location <span style="color:#dc2626;font-size:11px;">* (Required — click GPS button)</span></label>
+                <div class="location-row">
+                    <div class="input-field">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <input type="text" id="locationDisplay" placeholder="Click GPS button to detect location" readonly style="cursor:default;">
+                    </div>
+                    <button type="button" class="geo-btn" id="detectLocationBtn" title="Detect my location">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </button>
+                </div>
+                
+                <input type="hidden" id="latInput" name="latitude">
+                <input type="hidden" id="lngInput" name="longitude">
+            </div>
+
+            
+            <div class="input-group">
+                <label>Landmark</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <input type="text" id="landmarkinput" placeholder="Enter landmark (e.g., near hospital/park)">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>State</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-map"></i>
+                    <select id="stateinput">
+                        <option value="" disabled selected>Select state</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Ladakh">Ladakh</option>
+                        <option value="Lakshadweep">Lakshadweep</option>
+                        <option value="Puducherry">Puducherry</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Address</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-address-book"></i>
+                    <textarea id="addressinput" placeholder="Enter full address" rows="2"></textarea>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>City</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-city"></i>
+                    <input type="text" id="cityinput" placeholder="Enter city">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Pincode</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-hashtag"></i>
+                    <input type="text" id="pincodeinput" placeholder="Enter pincode" maxlength="6">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="passwordinput"placeholder="Create password" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="confirmpasswordinput" placeholder="Confirm password" required>
+                </div>
+            </div>
+
+            <div class="terms-container">
+                <div class="radio-wrapper">
+                    <input type="checkbox" id="termsCheck" required>
+                    <label for="termsCheck">I agree to the Terms & Conditions and Privacy Policy.</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Sign Up</button>
+        </form>
+
+        <div class="footer-section">
+            <p class="terms-footer">By continuing, you agree to our <a href="#">Terms & Privacy Policy</a>.</p>
+            
+    </div>
+
+    <div id="locationToast" class="toast hidden">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="toastMessage">Detecting location...</span>
+    </div>
+
+    
+    <div id="bbBlurBg" style="display:none; position:fixed; inset:0; z-index:9997; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); background:rgba(0,0,0,0.45);"></div>
+
+    
+    <div id="bbOtpOverlay" style="display:none; position:fixed; inset:0; background:transparent; z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#fff; border-radius:16px; padding:36px 32px; width:90%; max-width:380px; box-shadow:0 24px 60px rgba(0,0,0,0.18); text-align:center; position:relative; animation:bbOtpSlide 0.3s ease both;">
+            <div style="width:56px;height:56px;background:#fee2e2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:#dc2626;">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:6px;">OTP Verification</h3>
+            <p style="font-size:13px;color:#64748b;margin-bottom:6px;">A 4-digit OTP has been sent to your registered mobile number.</p>
+            <p style="font-size:12px;font-weight:600;color:#dc2626;margin-bottom:22px;">Enter any 4-digit code to verify</p>
+
+            <div style="display:flex;gap:10px;justify-content:center;margin-bottom:22px;">
+                <input class="bb-otp-box" type="text" maxlength="1" inputmode="numeric" id="bbOtp1" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;">
+                <input class="bb-otp-box" type="text" maxlength="1" inputmode="numeric" id="bbOtp2" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;">
+                <input class="bb-otp-box" type="text" maxlength="1" inputmode="numeric" id="bbOtp3" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;">
+                <input class="bb-otp-box" type="text" maxlength="1" inputmode="numeric" id="bbOtp4" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;">
+            </div>
+
+            <p id="bbOtpError" style="color:#dc2626;font-size:12.5px;font-weight:600;min-height:18px;margin-bottom:14px;"></p>
+
+            <button id="bbOtpVerifyBtn" onclick="verifyBBOTP()" style="width:100%;padding:13px;background:#dc2626;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:background 0.2s;margin-bottom:12px;">
+                Verify &amp; Continue <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button onclick="document.getElementById('bbOtpOverlay').style.display='none'" style="width:100%;padding:10px;background:#f1f5f9;color:#64748b;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">
+                Cancel
+            </button>
+        </div>
+    </div>
+    <style>
+        @keyframes bbOtpSlide { from{opacity:0;transform:translateY(-20px) scale(0.97)} to{opacity:1;transform:translateY(0) scale(1)} }
+        .bb-otp-box:focus { border-color:#dc2626 !important; box-shadow:0 0 0 3px rgba(220,38,38,0.12); }
+    </style>
+
+    <script src="BBLP.js"></script>
+</body>
+
+</html>
+

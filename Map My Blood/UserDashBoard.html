@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard | Map My Blood</title>
+    <link rel="icon" href="new logo.png" />
+    <link rel="stylesheet" href="UserDashBoard.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        /* A little extra inline CSS for the new welcome banner and search card */
+        .welcome-banner {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .welcome-banner h2 { margin-top: 0; font-size: 24px; }
+        .welcome-banner p { margin-bottom: 0; opacity: 0.9; }
+        
+        .search-cta {
+            text-align: center;
+            padding: 30px 15px;
+        }
+        .search-cta p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="new logo.png" alt="Logo" />
+            <span><strong>Map My Blood</strong></span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard">
+                <i class="fa-solid fa-house"></i> Dashboard
+            </a>
+            <a href="#" class="nav-item" data-section="profile">
+                <i class="fa-solid fa-user"></i> My Profile
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <a href="#" class="nav-item logout">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="topbar-title">Dashboard</div>
+            <div class="topbar-user">
+                <span class="user-name" id="topbarGreeting">Hello, User 👋</span>
+                <div class="avatar" id="topbarAvatar">U</div>
+            </div>
+        </header>
+
+        <section class="section active" id="sec-dashboard">
+
+            <div class="welcome-banner">
+                <h2 id="bannerGreeting">Welcome to Map My Blood!</h2>
+                <p>Every drop counts. Help save a life today by finding available blood banks near you.</p>
+            </div>
+
+            <div class="card mt-20">
+                <div class="card-header">
+                    <i class="fa-solid fa-magnifying-glass"></i> Find Blood
+                </div>
+                <div class="card-body search-cta">
+                    <p>Looking for a specific blood group or location? Head over to our dedicated search portal.</p>
+                    <button class="btn-red" onclick="window.location.href='BloodSearchpage.html'">
+                        <i class="fa-solid fa-arrow-right"></i> Go to Search Page
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="section" id="sec-profile">
+            <div class="card" style="max-width:520px;">
+                <div class="card-header"><i class="fa-solid fa-user"></i> My Profile</div>
+                <div class="card-body">
+                    <div class="profile-avatar-big" id="profileAvatarBig">U</div>
+                    
+                    <div class="form-group mt-20">
+                        <label>Full Name</label>
+                        <input type="text" id="profileName" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="profileEmail" readonly />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="profilePhone" />
+                    </div>
+                    
+                    <button class="btn-red" id="saveProfileBtn" onclick="saveProfile()" style="margin-top:10px;">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // ── SECURITY: Check if user is actually logged in ──
+        const token = localStorage.getItem('mmb_token');
+        const userType = localStorage.getItem('mmb_type');
+        const userDataString = localStorage.getItem('mmb_user');
+
+        // If no token or wrong user type, redirect back to login page
+        if (!token || userType !== 'user' || !userDataString) {
+            window.location.href = 'userLoginPage.html';
+        }
+
+        try {
+            // ── LOAD USER DATA ──
+            const userData = JSON.parse(userDataString);
+            
+            // Safety check: Ensure we have a string to work with to prevent crashes
+            const userName = userData.user_name || 'User';
+            const firstLetter = userName.charAt(0).toUpperCase();
+
+            // Populate Top Bar & Banner
+            document.getElementById('topbarGreeting').textContent = `Hello, ${userName} 👋`;
+            document.getElementById('bannerGreeting').textContent = `Welcome, ${userName}!`;
+            document.getElementById('topbarAvatar').textContent = firstLetter;
+
+            // Populate Profile Section
+            document.getElementById('profileAvatarBig').textContent = firstLetter;
+            document.getElementById('profileName').value = userName;
+            document.getElementById('profileEmail').value = userData.email || '';
+            document.getElementById('profilePhone').value = userData.phone || 'Not provided';
+
+        } catch (error) {
+            console.error("Error loading user data:", error);
+        }
+
+        // ── LOGOUT FUNCTIONALITY ──
+        const logoutBtn = document.querySelector('.logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function (e) {
+                e.preventDefault(); 
+                localStorage.removeItem('mmb_token');
+                localStorage.removeItem('mmb_user');
+                localStorage.removeItem('mmb_type');
+                window.location.href = 'index.html'; 
+            });
+        }
+
+        // ── Sidebar toggle (mobile) ──
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        // ── Section switching via sidebar links ──
+        document.querySelectorAll('.nav-item[data-section]').forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                var target = this.getAttribute('data-section');
+
+                // Update active nav
+                document.querySelectorAll('.nav-item').forEach(function (l) { l.classList.remove('active'); });
+                this.classList.add('active');
+
+                // Update active section
+                document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+                var sec = document.getElementById('sec-' + target);
+                if (sec) sec.classList.add('active');
+
+                // Update topbar title
+                document.querySelector('.topbar-title').textContent =
+                    target.charAt(0).toUpperCase() + target.slice(1).replace('-', ' ');
+
+                // Close sidebar on mobile
+                document.getElementById('sidebar').classList.remove('open');
+            });
+        });
+        
+        // ── SAVE PROFILE FUNCTIONALITY ──
+        async function saveProfile() {
+            const btn = document.getElementById('saveProfileBtn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+            btn.disabled = true;
+
+            const updatedName = document.getElementById('profileName').value.trim();
+            const updatedPhone = document.getElementById('profilePhone').value.trim();
+            const email = document.getElementById('profileEmail').value;
+
+            if (!updatedName || !updatedPhone) {
+                alert('Please fill out all fields.');
+                btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+                btn.disabled = false;
+                return;
+            }
+
+            try {
+                const response = await fetch('server.php?action=update-user-profile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, user_name: updatedName, phone: updatedPhone })
+                });
+                
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.message || 'Failed to update profile');
+                }
+                
+                // Update Local Storage
+                let currentUserData = JSON.parse(localStorage.getItem('mmb_user'));
+                currentUserData.user_name = updatedName;
+                currentUserData.phone = updatedPhone;
+                localStorage.setItem('mmb_user', JSON.stringify(currentUserData));
+                
+                // Update Top Bar & Banner
+                const firstLetter = updatedName.charAt(0).toUpperCase();
+                document.getElementById('topbarGreeting').textContent = `Hello, ${updatedName} 👋`;
+                document.getElementById('bannerGreeting').textContent = `Welcome, ${updatedName}!`;
+                document.getElementById('topbarAvatar').textContent = firstLetter;
+                document.getElementById('profileAvatarBig').textContent = firstLetter;
+                
+                alert('✅ Profile updated successfully!');
+            } catch (err) {
+                alert('❌ Error: ' + err.message);
+            } finally {
+                btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Save Changes';
+                btn.disabled = false;
+            }
+        }
+        
+        // Note: The goSearch() function was removed since the button links directly now.
+    </script>
+
+</body>
+</html>

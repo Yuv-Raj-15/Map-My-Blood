@@ -1,0 +1,455 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --border-2: #cbd5e1;
+    --input-bg: #f8fafc;
+    --red: #dc2626;
+    --red-dark: #b91c1c;
+    --red-light: #fee2e2;
+    --red-mid: #fca5a5;
+    --text: #0f172a;
+    --text-2: #374151;
+    --muted: #64748b;
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    position: relative;
+    background-image: radial-gradient(circle at 20% 20%, rgba(220, 38, 38, 0.05) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(220, 38, 38, 0.04) 0%, transparent 60%);
+}
+
+.back-home {
+    position: fixed;
+    top: 16px;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    z-index: 100;
+    transition: color 0.2s;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 7px 14px;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    font-weight: 500;
+}
+
+.back-home:hover {
+    color: var(--text);
+    border-color: var(--border-2);
+}
+
+.auth-card {
+    position: relative;
+    z-index: 1;
+    background: var(--card);
+    width: 100%;
+    max-width: 440px;
+    padding: 36px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+    margin: auto;
+    animation: slideUp 0.45s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.logo-container {
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 14px;
+    background: var(--red-light);
+    border: 2px solid var(--red-mid);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+.header h1 {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.header p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.tab-container {
+    display: flex;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 26px;
+    gap: 4px;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 7px;
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.tab.active {
+    background: white;
+    color: var(--red);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.tab:hover:not(.active) {
+    color: var(--text-2);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: var(--text-2);
+}
+
+.input-field {
+    background: var(--input-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-field:focus-within {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+    background: white;
+}
+
+.input-field i {
+    color: var(--muted);
+    width: 20px;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.input-field input {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    padding: 12px 8px;
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+}
+
+.input-field input::placeholder {
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+.location-row {
+    display: flex;
+    gap: 10px;
+}
+
+.location-row .input-field {
+    flex: 1;
+}
+
+.geo-btn {
+    background: var(--input-bg);
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    border-radius: 10px;
+    width: 48px;
+    flex-shrink: 0;
+    cursor: pointer;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+.geo-btn:hover {
+    background: var(--red-light);
+    border-color: var(--red-mid);
+    color: var(--red);
+}
+
+.btn-primary {
+    background: var(--red);
+    color: white;
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 4px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 3px 12px rgba(220, 38, 38, 0.3);
+    transition: all 0.22s ease;
+}
+
+.btn-primary:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.forgot-link {
+    text-align: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.forgot-link:hover {
+    color: var(--red);
+}
+
+.terms-container {
+    background: var(--bg);
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+
+.radio-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.radio-wrapper input[type="checkbox"] {
+    accent-color: var(--red);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.footer-section {
+    margin-top: 18px;
+}
+
+.terms-footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+.terms-footer a {
+    color: var(--red);
+    text-decoration: none;
+}
+
+.terms-footer a:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    margin: 0 0 16px;
+    position: relative;
+    text-align: center;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border);
+}
+
+.divider span {
+    position: relative;
+    background: var(--card);
+    padding: 0 14px;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-google {
+    width: 100%;
+    background: white;
+    color: var(--text-2);
+    border: 1.5px solid var(--border);
+    padding: 11px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+}
+
+.btn-google:hover {
+    background: var(--bg);
+    border-color: var(--border-2);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-google img {
+    width: 18px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: white;
+    border: 1px solid var(--border);
+    padding: 12px 18px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    box-shadow: var(--shadow-md);
+    z-index: 9999;
+    color: var(--text-2);
+}
+
+.toast.hidden {
+    display: none;
+}
+
+.toast i {
+    color: var(--blue);
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 20px 12px;
+        align-items: flex-start;
+    }
+
+    .back-home {
+        top: 10px;
+        left: 10px;
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+
+    .auth-card {
+        padding: 28px 18px;
+        border-radius: 14px;
+        margin-top: 48px;
+    }
+}
+
+@media (max-width: 420px) {
+    .auth-card {
+        padding: 22px 14px;
+        border-radius: 12px;
+    }
+
+    .location-row {
+        flex-direction: column;
+    }
+
+    .geo-btn {
+        width: 100%;
+        height: 46px;
+    }
+
+    .tab {
+        font-size: 13px;
+        padding: 9px 6px;
+    }
+
+    .header h1 {
+        font-size: 18px;
+    }
+}

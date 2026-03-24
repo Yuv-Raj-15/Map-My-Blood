@@ -1,0 +1,36 @@
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Prevent directory browsing which can trigger security flags
+Options -Indexes
+
+# Basic security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# ── Cache Control ──────────────────────────────────────────
+# HTML, CSS, JS, PHP: always fetch fresh (no caching)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|htm|css|js|php)$">
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header unset ETag
+    </FilesMatch>
+</IfModule>
+
+# Turn off ETags for HTML/CSS/JS to prevent stale 304 responses
+<FilesMatch "\.(html|htm|css|js|php)$">
+    FileETag None
+</FilesMatch>
+
+# Images and fonts: cache for 7 days (they change rarely)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    <FilesMatch "\.(png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|otf)$">
+        ExpiresDefault "access plus 7 days"
+    </FilesMatch>
+</IfModule>

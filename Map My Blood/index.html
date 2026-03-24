@@ -1,0 +1,758 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map My Blood | Find Blood Near You — Save Lives</title>
+    <meta name="description"
+        content="Map My Blood helps you locate verified blood banks near you instantly. Search by blood type, location and urgency. Free service for all.">
+    <link rel="icon" href="new logo.png">
+    <link rel="stylesheet" href="HomePage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="new logo.png" alt="Map My Blood Logo">
+            <span class="blood-word">Map My BLOOD</span>
+        </a>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="AboutUs.html" class="nav-link">About Us</a>
+            <a href="AskUser.html?action=login" class="btn-login">Login</a>
+            <a href="AskUser.html?action=signup" class="btn-signup">Sign Up Free</a>
+        </div>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="AboutUs.html" class="nav-link">About Us</a>
+        <a href="AskUser.html?action=login" class="btn-login" style="text-align:center;">Login</a>
+        <a href="AskUser.html?action=signup" class="btn-signup" style="text-align:center;">Sign Up Free</a>
+    </div>
+
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                India's Free Blood Discovery Platform
+            </div>
+
+            <h1>
+                <span class="highlight"> Every Second Counts.<br>
+                    Find Blood Near You<br>
+                    Instantly. </span>
+            </h1>
+
+            <p class="hero-sub">
+                Enter your location, blood type and urgency — we'll show you verified blood banks nearby with real-time
+                stock, directions and contact details. 100% free.
+            </p>
+
+            <div class="hero-btns">
+                <a href="javascript:void(0)" onclick="openEmergencyModal()" class="btn-primary-hero" id="findBloodBtn">
+                    <i class="fa-solid fa-droplet"></i> Emergency Section
+                </a>
+
+                <a href="AskUser.html?action=signup" class="btn-secondary-hero">
+                    <i class="fa-solid fa-hospital"></i> Register
+                </a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="500">0</div>
+                    <div class="hero-stat-label">+ Blood Banks</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="50000">0</div>
+                    <div class="hero-stat-label">+ Lives Helped</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="25">0</div>
+                    <div class="hero-stat-label">+ Cities Covered</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num" data-target="8">0</div>
+                    <div class="hero-stat-label">Blood Types Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt" id="how-it-works">
+        <div class="text-center reveal">
+            <div class="section-tag"><i class="fa-solid fa-circle-info"></i> Process</div>
+            <h2 class="section-title">How Map My Blood Works</h2>
+            <p class="section-sub">Search, locate, and connect with verified blood banks in just a few clicks. Simple.
+                Fast. Reliable.</p>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-card reveal">
+                <div class="step-num">01</div>
+                <div class="step-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                <h3>Enter Location & Blood Type</h3>
+                <p>Tell us your city or pinpoint location along with the required blood group and how many units are
+                    needed.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-num">02</div>
+                <div class="step-icon"><i class="fa-solid fa-hospital"></i></div>
+                <h3>See Nearby Verified Banks</h3>
+                <p>We filter only verified institutions that have your required blood type with real-time stock
+                    information.</p>
+            </div>
+            <div class="step-card reveal">
+                <div class="step-num">03</div>
+                <div class="step-icon"><i class="fa-solid fa-route"></i></div>
+                <h3>Get Directions & Call</h3>
+                <p>Instantly open Google Maps directions or call the blood bank directly — all from one screen, no extra
+                    apps needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="services">
+        <div class="text-center reveal">
+            <div class="section-tag"><i class="fa-solid fa-star"></i> Features</div>
+            <h2 class="section-title">Everything You Need to Save a Life</h2>
+            <p class="section-sub">A complete platform designed for both patients in need and verified medical
+                organisations managing their blood stock.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon red"><i class="fa-solid fa-location-dot"></i></div>
+                <h3>Real-Time Location Search</h3>
+                <p>Use GPS or type your city — our system finds blood banks within your proximity with accurate distance
+                    data.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon blue"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Verified Institutions Only</h3>
+                <p>Every blood bank goes through a strict verification process. Only government-licensed,
+                    identity-verified organisations appear in results.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon green"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Live Stock Updates</h3>
+                <p>Blood banks update their inventory directly via their dashboard. You always see the latest available
+                    units — no outdated data.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon purple"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h3>Urgent Mode Priority</h3>
+                <p>Mark your search as Urgent. Results are sorted to show closest, highest-stock banks first to minimise
+                    emergency response time.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon orange"><i class="fa-solid fa-map"></i></div>
+                <h3>Google Maps Integration</h3>
+                <p>One-click directions to any blood bank using Google Maps. No copy-pasting addresses — direct
+                    navigation support built in.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon teal"><i class="fa-solid fa-users"></i></div>
+                <h3>Dual Dashboard System</h3>
+                <p>Separate, role-based dashboards for patients/users and blood bank organisations. Each sees exactly
+                    what they need, nothing more.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-banner">
+        <div class="stats-grid">
+            <div class="stat-item reveal">
+                <div class="stat-num"><span data-target="500">0</span><span class="stat-plus">+</span></div>
+                <div class="stat-label">Verified Blood Banks</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-num"><span data-target="50000">0</span><span class="stat-plus">+</span></div>
+                <div class="stat-label">People Helped</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-num"><span data-target="25">0</span><span class="stat-plus">+</span></div>
+                <div class="stat-label">Cities Active</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-num">24<span class="stat-plus">/7</span></div>
+                <div class="stat-label">Platform Availability</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-num">100<span class="stat-plus">%</span></div>
+                <div class="stat-label">Free of Charge</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section section-alt text-center" id="blood-types">
+        <div class="reveal">
+            <div class="section-tag"><i class="fa-solid fa-droplet"></i> Coverage</div>
+            <h2 class="section-title">All Blood Types Covered</h2>
+            <p class="section-sub" style="margin-bottom:36px;">We support all 8 blood groups. Regardless of what you
+                need — we'll find it.</p>
+        </div>
+
+        <div class="blood-types-grid reveal">
+            <div class="blood-type-card">
+                <div class="bt-letters">A+</div>
+                <div class="bt-sub">A Positive</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">A−</div>
+                <div class="bt-sub">A Negative</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">B+</div>
+                <div class="bt-sub">B Positive</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">B−</div>
+                <div class="bt-sub">B Negative</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">AB+</div>
+                <div class="bt-sub">AB Positive</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">AB−</div>
+                <div class="bt-sub">AB Negative</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">O+</div>
+                <div class="bt-sub">O Positive</div>
+            </div>
+            <div class="blood-type-card">
+                <div class="bt-letters">O−</div>
+                <div class="bt-sub">O Negative</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="who-can-use">
+        <div class="text-center reveal">
+            <div class="section-tag"><i class="fa-solid fa-user-group"></i> Platform Access</div>
+            <h2 class="section-title">Built for Everyone</h2>
+            <p class="section-sub">Whether you need blood urgently or run a medical institution — Map My Blood has you
+                covered.</p>
+        </div>
+
+        <div class="features-grid"
+            style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 800px;">
+            <div class="feature-card reveal" style="border-color: rgba(230,57,70,0.2); padding: 36px;">
+                <div class="feature-icon red" style="width:64px;height:64px;font-size:28px;border-radius:16px;">
+                    <i class="fa-solid fa-user-heart"></i>
+                </div>
+                <h3 style="font-size:1.2rem; margin-bottom:12px;">For Patients & Families</h3>
+                <p style="margin-bottom:20px;">Register for free, search blood near your location, track your requests,
+                    and get directions to the nearest available blood bank instantly.</p>
+                <ul style="list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:24px;">
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#22c55e;"></i> Search by blood group & location
+                    </li>
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#22c55e;"></i> Urgent priority flagging
+                    </li>
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#22c55e;"></i> Request history & dashboard
+                    </li>
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#22c55e;"></i> One-click directions & call
+                    </li>
+                </ul>
+                <a href="AskUser.html?action=signup" class="btn-primary-hero"
+                    style="font-size:14px; padding:11px 24px; display:inline-flex;">
+                    Register as User <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="feature-card reveal" style="border-color: rgba(37,99,235,0.2); padding: 36px;">
+                <div class="feature-icon blue" style="width:64px;height:64px;font-size:28px;border-radius:16px;">
+                    <i class="fa-solid fa-hospital"></i>
+                </div>
+                <h3 style="font-size:1.2rem; margin-bottom:12px;">For Blood Banks & Hospitals</h3>
+                <p style="margin-bottom:20px;">Register your verified institution, update live blood inventory, manage
+                    incoming requests, and appear in patient search results automatically.</p>
+                <ul style="list-style:none; display:flex; flex-direction:column; gap:10px; margin-bottom:24px;">
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#60a5fa;"></i> Live blood stock management
+                    </li>
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#60a5fa;"></i> View & respond to requests
+                    </li>
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#60a5fa;"></i> Verified badge for trust
+                    </li>
+                    <li style="font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center;">
+                        <i class="fa-solid fa-check" style="color:#60a5fa;"></i> UHID & registration required
+                    </li>
+                </ul>
+                <a href="AskUser.html?action=signup" class="btn-secondary-hero"
+                    style="font-size:14px; padding:11px 24px; display:inline-flex;">
+                    Register Organisation <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt" id="testimonials">
+        <div class="text-center reveal">
+            <div class="section-tag"><i class="fa-solid fa-heart"></i> Stories</div>
+            <h2 class="section-title">Lives Touched, Hope Delivered</h2>
+            <p class="section-sub">Real stories from people who found blood when it mattered the most.</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"My mother needed O- blood urgently after surgery. Within 10 minutes of
+                    using Map My Blood, we located AIIMS blood bank with 31 units available. This platform saved her
+                    life."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">R</div>
+                    <div>
+                        <div class="author-name">Rajiv Malhotra</div>
+                        <div class="author-role">New Delhi, India</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"As an emergency doctor, I recommend Map My Blood to every patient's family.
+                    It's fast, the data is accurate, and the verified-only policy gives us confidence in every result
+                    shown."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">A</div>
+                    <div>
+                        <div class="author-name">Dr. Ananya Srivastava</div>
+                        <div class="author-role">Senior Physician, Mumbai</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"We registered our blood bank 2 months ago. The dashboard makes stock
+                    updates super easy, and we've received genuine requests from real patients. Excellent initiative by
+                    these college students!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">P</div>
+                    <div>
+                        <div class="author-name">Pradeep Nair</div>
+                        <div class="author-role">Blood Bank Coordinator, Bengaluru</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section text-center" id="gallery">
+        <div class="reveal">
+            <div class="section-tag"><i class="fa-solid fa-images"></i> Gallery</div>
+            <h2 class="section-title">The Heart Behind the Platform</h2>
+            <p class="section-sub" style="margin-bottom:36px;">Witness the community impact and the drive to save lives
+                through technology.</p>
+        </div>
+
+        <div class="gallery-grid reveal">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=800&q=80"
+                    alt="Blood donation camp">
+                <div class="gallery-overlay"><span>Blood Donation Camp</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=800&q=80"
+                    alt="Hospital blood bank">
+                <div class="gallery-overlay"><span>Hospital Blood Bank</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
+                    alt="Medical support">
+                <div class="gallery-overlay"><span>Medical Support</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80"
+                    alt="Healthcare team">
+                <div class="gallery-overlay"><span>Healthcare Warriors</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=800&q=80"
+                    alt="Emergency care">
+                <div class="gallery-overlay"><span>Emergency Response</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=800&q=80"
+                    alt="Volunteers">
+                <div class="gallery-overlay"><span>Community Volunteers</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="cta">
+        <div class="cta-bg"></div>
+        <div class="cta-content reveal">
+            <div class="section-tag" style="margin:0 auto 20px;"><i class="fa-solid fa-heart-pulse"></i> Get Started
+            </div>
+            <h2>Ready to Find Blood?<br>It's Fast & 100% Free.</h2>
+            <p>Join thousands of people who trust Map My Blood in emergency situations. Create an account or search
+                directly — no registration required for basic search.</p>
+
+            <div class="emergency-bar">
+                <i class="fa-solid fa-phone-volume em-icon"></i>
+                <span style="color:var(--muted); font-size:14px;">Emergency Helpline</span>
+                <span class="em-number">+91-90000-54321</span>
+                <span style="color:var(--muted); font-size:12px;">24×7 Support</span>
+            </div>
+
+            <div class="hero-btns" style="margin-bottom:0;">
+                <a href="AskUser.html?action=signup" class="btn-secondary-hero">
+                    <i class="fa-solid fa-user-plus"></i> Create Free Account
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="brand-name">
+                    <img src="new logo.png" alt="Logo">
+                    <span class="blood-word">Map My BLOOD</span>
+                </div>
+                <p>Connecting patients with verified blood banks across India. Fast, free, and life-saving. Built by
+                    college students with a mission to help.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="social-btn" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="AboutUs.html">About Us</a></li>
+                    <li><a href="AskUser.html?action=login">Login</a></li>
+                    <li><a href="AskUser.html?action=signup">Register</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Dashboards</h4>
+                <ul>
+                    <li><a href="UserDashBoard.html">User Dashboard</a></li>
+                    <li><a href="userLoginPage.html">User Login</a></li>
+                    <li><a href="BloodBankLoginP.html">Bank Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="mailto:support@mapmyblood.in"><i class="fa-solid fa-envelope" style="width:16px;"></i>
+                            support@mapmyblood.in</a></li>
+                    <li><a href="tel:+919000012345"><i class="fa-solid fa-phone" style="width:16px;"></i>
+                            +91-90000-12345</a></li>
+                    <li><a href="#"><i class="fa-solid fa-location-dot" style="width:16px;"></i> Hanamkonda, Telangana,
+                            India.
+                        </a></li>
+                    <li><a href="AboutUs.html">About the Project</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Map My Blood. All rights reserved.</p>
+            <p class="made-with">Made with <span>❤️</span> by NIT Warangal Students — for a better India</p>
+        </div>
+    </footer>
+
+    <div id="indexEmergencyModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;">
+        <div
+            style="background: #fff; padding: 30px; border-radius: 8px; width: 90%; max-width: 400px; position: relative;">
+            <span onclick="closeEmergencyModal()"
+                style="position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #666;">×</span>
+            <h3 style="margin-top: 0; color: #c0392b;">Emergency Details</h3>
+            <p style="font-size: 14px; margin-bottom: 20px;">Please provide patient details before accessing the
+                emergency database.</p>
+
+            <form onsubmit="proceedToEmergency(event)">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px;">Patient
+                        Name</label>
+                    <input type="text" id="idxEmName" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px;">Contact
+                        Number</label>
+                    <input type="tel" id="idxEmPhone" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 500; font-size: 14px;">Aadhar /
+                        Identity Number</label>
+                    <input type="text" id="idxEmAadhar" required
+                        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                <button type="submit"
+                    style="display: inline-block; width: 100%; padding: 10px; margin-top: 10px; background-color: #e74c3c; color: white; border: none; border-radius: 4px; font-weight: 600; cursor: pointer;">Proceed
+                    to Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="emBlurBg"
+        style="display:none; position:fixed; inset:0; z-index:2999; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); background:rgba(0,0,0,0.45);">
+    </div>
+
+    <div id="emOtpOverlay"
+        style="display:none; position:fixed; inset:0; background:transparent; z-index:3000; justify-content:center; align-items:center;">
+        <div
+            style="background:#fff; border-radius:16px; padding:32px 28px; width:90%; max-width:360px; text-align:center; box-shadow:0 24px 60px rgba(0,0,0,0.2); animation:emOtpIn 0.3s ease both;">
+            <div
+                style="width:52px;height:52px;background:#fee2e2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;color:#dc2626;">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 style="font-size:1.1rem;font-weight:800;color:#0f172a;margin-bottom:6px;">OTP Verification</h3>
+            <p style="font-size:13px;color:#64748b;margin-bottom:4px;">A 4-digit OTP has been sent to your mobile
+                number.</p>
+            <p style="font-size:12px;font-weight:600;color:#dc2626;margin-bottom:20px;">Enter any 4-digit code to
+                continue</p>
+            <div style="display:flex;gap:10px;justify-content:center;margin-bottom:18px;">
+                <input class="em-otp-box" type="text" maxlength="1" inputmode="numeric" id="emOtp1"
+                    style="width:50px;height:54px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;">
+                <input class="em-otp-box" type="text" maxlength="1" inputmode="numeric" id="emOtp2"
+                    style="width:50px;height:54px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;">
+                <input class="em-otp-box" type="text" maxlength="1" inputmode="numeric" id="emOtp3"
+                    style="width:50px;height:54px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;">
+                <input class="em-otp-box" type="text" maxlength="1" inputmode="numeric" id="emOtp4"
+                    style="width:50px;height:54px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;">
+            </div>
+            <p id="emOtpError"
+                style="color:#dc2626;font-size:12.5px;font-weight:600;min-height:18px;margin-bottom:14px;"></p>
+            <button id="emOtpVerifyBtn" onclick="verifyEmergencyOTP()"
+                style="width:100%;padding:12px;background:#dc2626;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:10px;">Verify
+                &amp; Continue <i class="fa-solid fa-arrow-right"></i></button>
+            <button onclick="document.getElementById('emOtpOverlay').style.display='none'"
+                style="width:100%;padding:9px;background:#f1f5f9;color:#64748b;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">Cancel</button>
+        </div>
+    </div>
+    <style>
+        @keyframes emOtpIn {
+            from {
+                opacity: 0;
+                transform: translateY(-16px) scale(0.97)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1)
+            }
+        }
+
+        .em-otp-box:focus {
+            border-color: #dc2626 !important;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+        }
+    </style>
+
+    <script src="Homepage.js"></script>
+    <script>
+        function openEmergencyModal() {
+            const user = localStorage.getItem('mmb_user');
+            if (user && localStorage.getItem('mmb_token')) {
+                window.location.href = 'BloodSearchpage.html';
+            } else {
+                document.getElementById('indexEmergencyModal').style.display = 'flex';
+            }
+        }
+
+        function closeEmergencyModal() {
+            document.getElementById('indexEmergencyModal').style.display = 'none';
+        }
+
+        let _emName, _emPhone, _emAadhar, _emSubmitBtn, _emOrigText;
+
+        async function proceedToEmergency(e) {
+            e.preventDefault();
+            const name = document.getElementById('idxEmName').value.trim();
+            const phone = document.getElementById('idxEmPhone').value.trim();
+            const aadhar = document.getElementById('idxEmAadhar').value.trim();
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const origText = submitBtn.textContent;
+
+            const oldErr = document.getElementById('emLimitError');
+            if (oldErr) oldErr.remove();
+
+            submitBtn.textContent = 'Checking…';
+            submitBtn.disabled = true;
+
+            try {
+                const usageRes = await fetch('server.php?action=check-emergency-usage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone })
+                });
+                const usage = await usageRes.json();
+
+                if (usage.limit_reached) {
+                    const err = document.createElement('p');
+                    err.id = 'emLimitError';
+                    err.style.cssText = 'color:#c0392b;background:#fdecea;border:1px solid #f5c6cb;border-radius:4px;padding:10px 14px;font-size:13px;font-weight:600;margin-bottom:12px;';
+                    err.innerHTML = '⚠️ This phone number has already used the Emergency Section <strong>2 times today</strong>. Please try again tomorrow or <a href="AskUser.html?action=login" style="color:#c0392b;">log in</a> to continue.';
+                    e.target.insertBefore(err, e.target.firstChild);
+                    submitBtn.textContent = origText;
+                    submitBtn.disabled = false;
+                    return;
+                }
+
+                _emName = name; _emPhone = phone; _emAadhar = aadhar;
+                _emSubmitBtn = submitBtn; _emOrigText = origText;
+                ['emOtp1', 'emOtp2', 'emOtp3', 'emOtp4'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('emOtpError').textContent = '';
+                document.getElementById('emOtpVerifyBtn').disabled = false;
+                document.getElementById('emOtpVerifyBtn').innerHTML = 'Verify & Continue <i class="fa-solid fa-arrow-right"></i>';
+                document.getElementById('emOtpOverlay').style.display = 'flex';
+                document.getElementById('emBlurBg').style.display = 'block';
+                document.body.classList.remove('em-otp-open'); // legacy cleanup
+                document.getElementById('emOtp1').focus();
+                submitBtn.textContent = origText;
+                submitBtn.disabled = false;
+
+            } catch (err) {
+                console.warn('Usage check failed, proceeding anyway:', err);
+                _emName = name; _emPhone = phone; _emAadhar = aadhar;
+                _continueEmergencyAfterOTP();
+            }
+        }
+
+        async function verifyEmergencyOTP() {
+            const digits = ['emOtp1', 'emOtp2', 'emOtp3', 'emOtp4'].map(id => document.getElementById(id).value.trim());
+            const code = digits.join('');
+            if (code.length < 4) {
+                document.getElementById('emOtpError').textContent = '⚠️ Please enter all 4 digits.';
+                return;
+            }
+            document.getElementById('emOtpError').textContent = '';
+            document.getElementById('emOtpVerifyBtn').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying...';
+            document.getElementById('emOtpVerifyBtn').disabled = true;
+            setTimeout(() => {
+                document.getElementById('emOtpOverlay').style.display = 'none';
+                document.getElementById('emBlurBg').style.display = 'none';
+                document.body.classList.remove('em-otp-open'); // legacy cleanup
+                _continueEmergencyAfterOTP();
+            }, 700);
+        }
+
+        async function _continueEmergencyAfterOTP() {
+            sessionStorage.setItem('idx_emergency', JSON.stringify({ name: _emName, phone: _emPhone, aadhar: _emAadhar }));
+            try {
+                await fetch('server.php?action=register-emergency-user', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_name: _emName, phone: _emPhone, aadhar: _emAadhar })
+                });
+            } catch (err) {
+                console.warn('Emergency user registration failed (non-blocking):', err);
+            }
+            window.location.href = 'BloodSearchpage.html';
+        }
+
+        document.querySelectorAll('.em-otp-box').forEach((box, i, arr) => {
+            box.addEventListener('input', () => {
+                box.value = box.value.replace(/\D/g, '').slice(0, 1);
+                if (box.value && i < arr.length - 1) arr[i + 1].focus();
+            });
+            box.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Backspace' && !box.value && i > 0) arr[i - 1].focus();
+                if (ev.key === 'Enter') verifyEmergencyOTP();
+            });
+        });
+
+        function animateCounter(el, target, duration) {
+            let start = 0;
+            const step = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += step;
+                if (start >= target) { start = target; clearInterval(timer); }
+                el.textContent = target >= 10000
+                    ? Math.floor(start).toLocaleString('en-IN')
+                    : Math.floor(start);
+            }, 16);
+        }
+
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('[data-target]').forEach(el => {
+                        animateCounter(el, parseInt(el.dataset.target), 1800);
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.hero-stats, .stats-grid').forEach(el => counterObserver.observe(el));
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                navbar.style.background = 'rgba(11,13,19,0.98)';
+            } else {
+                navbar.style.background = 'rgba(11,13,19,0.85)';
+            }
+        });
+
+
+        document.getElementById('hamburgerBtn').addEventListener('click', () => {
+            const mobileNav = document.getElementById('mobileNav');
+            const btn = document.getElementById('hamburgerBtn');
+            mobileNav.classList.toggle('open');
+            btn.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobileNav').classList.remove('open');
+                document.getElementById('hamburgerBtn').classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

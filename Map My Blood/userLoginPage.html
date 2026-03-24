@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login | Map My Blood</title>
+    <meta name="description" content="Login or sign up as a user on Map My Blood to find blood near you.">
+    <link rel="stylesheet" href="userLoginPage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="new logo.png">
+</head>
+
+<body>
+    <a href="index.html" class="back-home"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+    <div class="auth-card">
+        <div class="header">
+            <div class="logo-container">
+                <img src="new logo.png" alt="Logo" class="logo">
+            </div>
+            <h1>Map My Blood</h1>
+            <p>Find Blood on one Tap</p>
+        </div>
+
+        <div class="tab-container">
+            <button class="tab active" id="loginTab">Login</button>
+            <button class="tab" id="signupTab">Sign Up</button>
+        </div>
+
+        <form id="loginForm" class="auth-form">
+            <div class="input-group">
+                <label>Email</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+            </div>
+            <div id="loginMsg" class="form-msg"></div>
+            <button type="submit" class="btn-primary" id="loginBtn">Login</button>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+        </form>
+
+        <form id="signupForm" class="auth-form hidden">
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="signupName" placeholder="Enter full name" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <div class="input-field">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="signupEmail" placeholder="Enter email" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Phone Number</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="tel" id="signupPhone" placeholder="Enter phone number">
+                </div>
+            </div>
+
+           
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="signupPassword" placeholder="Create password" required>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="input-field">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm password" required>
+                </div>
+            </div>
+
+            <div class="terms-container">
+                <div class="radio-wrapper">
+                    <input type="checkbox" id="termsCheck" required>
+                    <label for="termsCheck">I agree to the Terms & Conditions and Privacy Policy.</label>
+                </div>
+            </div>
+
+            <div id="signupMsg" class="form-msg"></div>
+            <button type="submit" class="btn-primary" id="signupBtn">Sign Up</button>
+        </form>
+
+        <div class="footer-section">
+            <p class="terms-footer">By continuing, you agree to our <a href="#">Terms & Privacy Policy</a>.</p>
+            <div class="divider"><span>Or continue with</span></div>
+            <button class="btn-google">
+                <img src="Images\googleLogo.webp" alt="Google">
+                Sign in with Google
+            </button>
+        </div>
+    </div>
+
+    
+    <div id="otpBlurBg" style="display:none; position:fixed; inset:0; z-index:9997; backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); background:rgba(0,0,0,0.45);"></div>
+
+    
+    <div id="otpOverlay" style="display:none; position:fixed; inset:0; background:transparent; z-index:9999; justify-content:center; align-items:center;">
+        <div style="background:#fff; border-radius:16px; padding:36px 32px; width:90%; max-width:380px; box-shadow:0 24px 60px rgba(0,0,0,0.18); text-align:center; position:relative; animation:otpSlide 0.3s ease both;">
+            <div style="width:56px;height:56px;background:#fee2e2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:24px;color:#dc2626;">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 style="font-size:1.15rem;font-weight:800;color:#0f172a;margin-bottom:6px;">OTP Verification</h3>
+            <p style="font-size:13px;color:#64748b;margin-bottom:6px;">A 4-digit OTP has been sent to your mobile number.</p>
+            <p id="otpInfoLine" style="font-size:12px;font-weight:600;color:#dc2626;margin-bottom:22px;">Enter any 4-digit code to verify</p>
+
+            
+            <div style="display:flex;gap:10px;justify-content:center;margin-bottom:22px;">
+                <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;" id="otp1">
+                <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;" id="otp2">
+                <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;" id="otp3">
+                <input class="otp-box" type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" style="width:52px;height:56px;border:2px solid #e2e8f0;border-radius:10px;font-size:1.4rem;font-weight:700;text-align:center;color:#0f172a;outline:none;transition:border-color 0.2s;" id="otp4">
+            </div>
+
+            <p id="otpError" style="color:#dc2626;font-size:12.5px;font-weight:600;min-height:18px;margin-bottom:14px;"></p>
+
+            <button id="otpVerifyBtn" onclick="verifyOTP()" style="width:100%;padding:13px;background:#dc2626;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;transition:background 0.2s;margin-bottom:12px;">
+                Verify &amp; Continue <i class="fa-solid fa-arrow-right"></i>
+            </button>
+            <button onclick="closeOTPModal()" style="width:100%;padding:10px;background:#f1f5f9;color:#64748b;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <style>
+        @keyframes otpSlide {
+            from { opacity:0; transform:translateY(-20px) scale(0.97); }
+            to   { opacity:1; transform:translateY(0) scale(1); }
+        }
+        .otp-box:focus { border-color:#dc2626 !important; box-shadow:0 0 0 3px rgba(220,38,38,0.12); }
+    </style>
+
+    <div id="locationToast" class="toast hidden">
+        <i class="fa-solid fa-circle-info"></i>
+        <span id="toastMessage">Detecting location...</span>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="userLogin.js"></script>
+</body>
+
+</html>
